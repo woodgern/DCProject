@@ -26,8 +26,8 @@ void TextDisplay::drawStatus(string action, int floorCount){
 	cout << left << "Race: " << player.getRace();
 	cout << " Gold: " << player.getGold();
 	cout << setw(72) << "Floor " << floorCount << endl;
-	cout << "HP: " << player.getHP() << endl;
-	cout << "Atk: " << player.getAtk() << endl;
-	cout << "Def: " << player.getDef() << endl;
+	cout << "HP: " << player.getHealth() << endl;
+	cout << "Atk: " << player.getAttack() << endl;
+	cout << "Def: " << player.getDefense() << endl;
 	cout << "Action: " << action << endl;
 }
