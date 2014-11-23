@@ -3,14 +3,20 @@
 // Constructors/Destructors
 //  
 
+<<<<<<< HEAD
 ItemPotion::ItemPotion (char attrib, int pot) {
 	attribute = attrib;
 	symbol = 'P';
 	potency = pot;
+=======
+ItemPotion::ItemPotion () {
+initAttributes();
+>>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
 }
 
 ItemPotion::~ItemPotion () { }
 
+<<<<<<< HEAD
 char ItemPotion::getClassName ()
   {
   	return 'p';
@@ -83,4 +89,20 @@ char ItemPotion::getClassName ()
   int ItemPotion::getPotency() {
   	return potency;
   }
+=======
+//  
+// Methods
+//  
+
+
+// Accessor methods
+//  
+
+
+// Other methods
+//  
+
+void ItemPotion::initAttributes () {
+}
+>>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
 

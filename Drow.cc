@@ -4,11 +4,15 @@
 //  
 
 Drow::Drow () {
+<<<<<<< HEAD
 	trigger = "potion";
+=======
+>>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
 }
 
 Drow::~Drow () { }
 
+<<<<<<< HEAD
  void Drow::applyAbility (char trigger, Character* actingCharacter, int type)
   {
   	if(trigger = this->trigger) {
@@ -38,5 +42,18 @@ Drow::~Drow () { }
   		}
   	}
   }
+=======
+//  
+// Methods
+//  
+
+
+// Accessor methods
+//  
+
+
+// Other methods
+//  
+>>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
 
 
