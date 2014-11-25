@@ -3,7 +3,7 @@
 // Constructors/Destructors
 //  
 
-<<<<<<< HEAD
+
 /*Character::Character (string race) {
 	this->race = race;
 	symbol = 
@@ -82,27 +82,13 @@ Character::~Character () {
   }
 
 
-  /**
-   */
-  void Character::moveCharacter ()
-  {
-  }
-
-
-  /**
-   * @return string
-   */
-  string Character::doAction ()
-  {
-  }
-
 
   /**
    * @return string
    */
   string Character::getRace ()
   {
-  	return 
+  	return race;
   }
 
 
@@ -136,26 +122,7 @@ Character::~Character () {
   		health += potion->getPotency();
   	}
   }
-=======
-Character::Character () {
-initAttributes();
-}
-
-Character::~Character () { }
-
-//  
-// Methods
-//  
 
 
-// Accessor methods
-//  
 
 
-// Other methods
-//  
-
-void Character::initAttributes () {
-}
-
->>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
