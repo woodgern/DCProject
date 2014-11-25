@@ -4,7 +4,6 @@
 
 #include <string>
 #include "Entity.h"
-#include "Ability.h"
 
 
 /******************************* Abstract Class ****************************
@@ -19,7 +18,6 @@ protected:
   int health;
   int attack;
   int defense;
-  Ability *specialAbility;
   int accuracy;
   std::string race;
   int baseDefense;
@@ -30,11 +28,6 @@ protected:
 public:
   Character ();
   virtual ~Character ();
-  /**
-   * @param  trigger
-   */
-  void applyAbility (std::string trigger, Character *target);
-
   bool isDead ();
   std::string doCombat (Character *target);
 

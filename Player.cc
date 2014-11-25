@@ -15,31 +15,23 @@ Player::Player (std::string race) {
   attack=100;
   defense=100;
   accuracy=100;
+  baseAttack = 100;
+  baseDefense = 100;
 	if(race == "") {
-		specialAbility = new Orc();
 	}
 	else if(race == "") {
-		specialAbility = new Drow();
 	}
 	else if(race == "") {
-		specialAbility = new Vampire();
 	}
 	else if(race == "") {
-		specialAbility = new Troll();
 	}
 	else if(race == "") {
-		specialAbility = new Goblin();
 	}
 	else {
-		specialAbility = NULL;
 	}
 }
 
-Player::~Player () {
-	if(specialAbility != NULL) {
-		delete specialAbility;
-	}
-}
+
 void Player::pickUpGold (int amountToAdd)
   {
   	goldCount += amountToAdd;

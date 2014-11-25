@@ -4,6 +4,7 @@
 
 #include <string>
 #include "Ability.h"
+#include "Player.h"
 
 /**
   * class Drow
@@ -20,7 +21,7 @@ public:
    * @param  actingCharacter
    * @param  targetCharacter
    */
-  void applyAbility (char trigger, Character *actingCharacter, int type);
+  void applyAbility (char trigger, Player *actingCharacter, int type);
 };
 
 #endif // DROW_H

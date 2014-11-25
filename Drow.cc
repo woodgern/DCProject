@@ -9,32 +9,28 @@ Drow::Drow () {
 }
 
 Drow::~Drow () { }
- void Drow::applyAbility (char trigger, Character* actingCharacter, int type)
+ void Drow::applyAbility (char trigger, Player* actingCharacter, int type)
   {
-  	if(trigger = this->trigger) {
+  	if(trigger = this->triggerAction) {
+      ItemPotion *temp;
   		if(type == 0) {
-  			ItemPotion *temp = new ItemPotion('A', 5);
-  			actingCharacter->usePotion(temp);
+  			temp = new ItemPotion('A', 5);
   		}
   		else if(type == 1) {
-  			ItemPotion *temp = new ItemPotion('D', 5);
-  			actingCharacter->usePotion(temp);
+  			temp = new ItemPotion('D', 5);
   		}
   		else if(type == 2) {
-  			ItemPotion *temp = new ItemPotion('H', 10);
-  			actingCharacter->usePotion(temp);
+  			temp = new ItemPotion('H', 5);
   		}
   		else if(type == 3) {
-  			ItemPotion *temp = new ItemPotion('A', -5);
-  			actingCharacter->usePotion(temp);	
+  			temp = new ItemPotion('A', -5);
   		}
   		else if(type == 4) {
-  			ItemPotion *temp = new ItemPotion('D', -5);
-  			actingCharacter->usePotion(temp);
+  			temp = new ItemPotion('D', -5);
   		}
   		else {
-  			ItemPotion *temp = new ItemPotion('H', -10);
-  			actingCharacter->usePotion(temp);
+  			temp = new ItemPotion('H', -5);
   		}
+      actingCharacter->applyPotion(temp);
   	}
   }

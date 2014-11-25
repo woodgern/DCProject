@@ -2,20 +2,7 @@
 #include <cmath>
 #include <cstdlib>
 // Constructors/Destructors
-//  
-
-
- /**
-   * @param  trigger
-   */
-  void Character::applyAbility (std::string trigger, Character *target)
-  {
-  	if(specialAbility != NULL) {
-  		specialAbility->applyAbility(trigger,this, target);
-  	}
-  }
-
-
+//
   /**
    * @return bool
    */
