@@ -1,11 +1,20 @@
 #include "Player.h"
+#include "Drow.h"
+#include "Orc.h"
+#include "Troll.h"
+#include "Vampire.h"
+#include "Goblin.h"
 
 // Constructors/Destructors
 //  
 
-Player::Player (string race) {
+Player::Player (std::string race) {
 	this->race = race;
-	symbol = 
+	symbol = '@';
+  health=100;
+  attack=100;
+  defense=100;
+  accuracy=100;
 	if(race == "") {
 		specialAbility = new Orc();
 	}
@@ -29,7 +38,7 @@ Player::Player (string race) {
 Player::~Player () {
 	if(specialAbility != NULL) {
 		delete specialAbility;
-	} 
+	}
 }
 void Player::pickUpGold (int amountToAdd)
   {
@@ -59,7 +68,7 @@ void Player::pickUpGold (int amountToAdd)
   /**
    * @param  toApply
    */
-  void Player::applyPotion(ItemPotion * potion) {
+  void Player::applyPotion(ItemPotion *potion) {
   	int type = potion->getType();
   	if(type == 0 || type == 3) {
   		attack += potion->getPotency();
@@ -79,19 +88,23 @@ void Player::pickUpGold (int amountToAdd)
   /**
    * @return string
    */
-  string Player::getClassName ()
+  char Player::getClassName ()
   {
-  	return "Player";
+  	return 'P';
   }
 
 
   /**
    * @return int
    */
-  int* Player::getPosition ()
+  int Player::getX()
   {
-  	int a[2] = {xLoc, yLoc};
-  	return a;
+  	return xLoc;
   }
-
-
+  /**
+   * @return int
+   */
+  int Player::getY()
+  {
+    return yLoc;
+  }

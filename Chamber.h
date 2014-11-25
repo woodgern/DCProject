@@ -3,6 +3,7 @@
 #define CHAMBER_H
 
 #include <string>
+#include "Tile.h"
 
 /**
   * class Chamber

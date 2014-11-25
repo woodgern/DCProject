@@ -3,139 +3,24 @@
 #define ITEMPOTION_H
 
 #include <string>
+#include "Item.h"
 
 /**
   * class ItemPotion
   * 
   */
 
-class ItemPotion
+class ItemPotion : public Item
 {
-<<<<<<< HEAD
   char attribute;
   int potency;
-=======
->>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
-  ItemPotion ();
-
-  /**
-   * Empty Destructor
-   */
+  ItemPotion (char atrb, int pot);
   virtual ~ItemPotion ();
-
-<<<<<<< HEAD
- 
-=======
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
->>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
-
-
-
-  /**
-   * @return char
-   */
-  char getClassName ()
-  {
-  }
-
-
-  /**
-   * @return char
-   */
-  char getSymbol ()
-  {
-  }
-
-
-  /**
-   * @return string
-   */
-  string getDescription ()
-  {
-  }
-
-
-  /**
-   * @return int
-   */
-  int getType ()
-  {
-  }
-
-<<<<<<< HEAD
-
-
-=======
-protected:
-
-  // Static Protected attributes
-  //  
-
-  // Protected attributes
-  //  
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-
-private:
-
-  // Static Private attributes
-  //  
-
-  // Private attributes
-  //  
-
-  char attribute;
-  int potency;
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
+  char getClassName ();
+  char getSymbol ();
+  std::string getDescription ();
+  int getType ();
 
   /**
    * Set the value of attribute
@@ -160,20 +45,11 @@ public:
   void setPotency (int new_var)   {
       potency = new_var;
   }
-
-  /**
-   * Get the value of potency
-   * @return the value of potency
-   */
-  int getPotency ()   {
-    return potency;
-  }
+  int getPotency ();
 private:
 
 
   void initAttributes () ;
->>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
-
 };
 
 #endif // ITEMPOTION_H

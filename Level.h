@@ -3,6 +3,7 @@
 #define LEVEL_H
 
 #include <string>
+#include "Chamber.h"
 
 /**
   * class Level

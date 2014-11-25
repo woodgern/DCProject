@@ -30,7 +30,7 @@ char ItemPotion::getClassName ()
   /**
    * @return string
    */
-  string ItemPotion::getDescription ()
+  std::string ItemPotion::getDescription ()
   {
   	if(getType() == 0) {
   		return "";

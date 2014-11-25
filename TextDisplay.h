@@ -11,14 +11,14 @@ class TextDisplay
     Tile *map[25][79];
     Player *player;
 
-    void drawStatus (string action, int floorCount);
-    void drawMap ();
+    void drawStatus(std::string action, int floorCount);
+    void drawMap();
 
     public:
-    TextDisplay (Tile *newMap[][], Player *player);
+    TextDisplay(Tile *newMap[25][79], Player *player);
     virtual ~TextDisplay ();
 
-    void draw (string action, int floorCount);
+    void draw(std::string action, int floorCount);
 };
 
 #endif // TEXTDISPLAY_H

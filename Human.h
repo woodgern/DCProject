@@ -3,13 +3,14 @@
 #define HUMAN_H
 
 #include <string>
+#include "Ability.h"
 
 /**
   * class Human
   * 
   */
 
-class Human
+class Human : public Ability
 {
 public:
 

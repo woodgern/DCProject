@@ -3,7 +3,8 @@
 #define PLAYER_H
 
 #include <string>
-#include vector
+#include "Character.h"
+#include "ItemPotion.h"
 
 
 
@@ -12,7 +13,7 @@
   * 
   */
 
-class Player
+class Player : public Character
 {
   int goldCount;
   bool* potionKnowledge;
@@ -27,7 +28,7 @@ public:
   /**
    * Empty Constructor
    */
-  Player ();
+  Player (std::string race);
 
   /**
    * Empty Destructor
@@ -38,51 +39,13 @@ public:
   /**
    * @param  amountToAdd
    */
-  void pickUpGold (int amountToAdd)
-  {
-  }
-
-
-  /**
-   * @return int
-   */
-  int getGold ()
-  {
-  }
-
-
-  /**
-   * @return bool
-   * @param  potionType
-   */
-  bool isPotionKnown (int potionType)
-  {
-  }
-
-
-  /**
-   * @param  toApply
-   */
-  void applyPotion (ItemPotion toApply)
-  {
-  }
-
-
-  /**
-   * @return string
-   */
-  string getClassName ()
-  {
-  }
-
-
-  /**
-   * @return int
-   */
-  int* getPosition ()
-  {
-
-  }
+  void pickUpGold (int amountToAdd);
+  int getGold ();
+  bool isPotionKnown (int potionType);
+  void applyPotion (ItemPotion *toApply);
+  char getClassName ();
+  int getX();
+  int getY();
 
 };
 

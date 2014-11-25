@@ -1,18 +1,14 @@
 #include "Drow.h"
+#include "ItemPotion.h"
 
 // Constructors/Destructors
 //  
 
 Drow::Drow () {
-<<<<<<< HEAD
-	trigger = "potion";
-=======
->>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
+	triggerAction = 'p';
 }
 
 Drow::~Drow () { }
-
-<<<<<<< HEAD
  void Drow::applyAbility (char trigger, Character* actingCharacter, int type)
   {
   	if(trigger = this->trigger) {
@@ -25,7 +21,7 @@ Drow::~Drow () { }
   			actingCharacter->usePotion(temp);
   		}
   		else if(type == 2) {
-  			ItemPotion *temp = new ItemPotion('H', 5);
+  			ItemPotion *temp = new ItemPotion('H', 10);
   			actingCharacter->usePotion(temp);
   		}
   		else if(type == 3) {
@@ -37,23 +33,8 @@ Drow::~Drow () { }
   			actingCharacter->usePotion(temp);
   		}
   		else {
-  			ItemPotion *temp = new ItemPotion('H', -5);
+  			ItemPotion *temp = new ItemPotion('H', -10);
   			actingCharacter->usePotion(temp);
   		}
   	}
   }
-=======
-//  
-// Methods
-//  
-
-
-// Accessor methods
-//  
-
-
-// Other methods
-//  
->>>>>>> 4e7201a8a4982e247de03cd1d032a8f52cc5d525
-
-

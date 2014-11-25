@@ -3,7 +3,7 @@
 #define NPC_H
 
 #include <string>
-#include vector
+#include "Character.h"
 
 
 
@@ -18,105 +18,14 @@ NPC does not have any pure virtual methods, but its author
   Inherit from it instead and create only objects from the derived classes
 *****************************************************************************/
 
-class NPC
+class NPC : public Character
 {
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
   NPC ();
-
-  /**
-   * Empty Destructor
-   */
+  NPC(std::string type);
   virtual ~NPC ();
-
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-
-  /**
-   */
-  void onDeath ()
-  {
-  }
-
-
-  /**
-   * @return string
-   */
-  string getClassName ()
-  {
-  }
-
-protected:
-
-  // Static Protected attributes
-  //  
-
-  // Protected attributes
-  //  
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-
-private:
-
-  // Static Private attributes
-  //  
-
-  // Private attributes
-  //  
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-
-
+  void onDeath ();
+  char getClassName ();
 };
 
 #endif // NPC_H

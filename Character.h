@@ -3,11 +3,9 @@
 #define CHARACTER_H
 
 #include <string>
+#include "Entity.h"
+#include "Ability.h"
 
-/**
-  * class Character
-  * 
-  */
 
 /******************************* Abstract Class ****************************
 Character does not have any pure virtual methods, but its author
@@ -15,124 +13,38 @@ Character does not have any pure virtual methods, but its author
   Inherit from it instead and create only objects from the derived classes
 *****************************************************************************/
 
-class Character
+class Character : public Entity
 {
-
+protected:
   int health;
   int attack;
   int defense;
-  Ability specialAbility;
+  Ability *specialAbility;
   int accuracy;
-  string race;
+  std::string race;
+  int baseDefense;
   int baseAttack;
   int maxHealth;
   int baseAccuracy;
 
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
   Character ();
-
-  /**
-   * Empty Destructor
-   */
   virtual ~Character ();
-
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-
   /**
    * @param  trigger
    */
-  void applyAbility (string trigger)
-  {
-  }
+  void applyAbility (std::string trigger, Character *target);
 
+  bool isDead ();
+  std::string doCombat (Character *target);
 
-  /**
-   * @return bool
-   */
-  bool isDead ()
-  {
-  }
-
-
-  /**
-   * @return string
-   * @param  target
-   */
-  string attack (Character target)
-  {
-  }
-
-
-  /**
-   * @return int
-   * @param  accuracy
-   */
-  void applyHit (int accuracy)
-  {
-  }
-
-
-  /**
-   * @return string
-   */
-  string getRace ()
-  {
-  }
-
-
-  /**
-   * @return int
-   */
-  int baseDefense ()
-  {
-  }
-
-
-  /**
-   */
-  void resetStats ()
-  {
-  }
-
-
-
-  int getDefense() {
-
-  }
-  int getAttack() {
-
-  }
-  int getAccuracy() {
-
-  }
-
-
-
-
-
-
+  void applyHit (int accuracy);
+  std::string getRace ();
+  int getHealth ();
+  void resetStats ();
+  int getDefense();
+  int getAttack();
+  int getAccuracy();
 };
 
 #endif // CHARACTER_H

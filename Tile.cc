@@ -1,9 +1,10 @@
 #include "Tile.h"
+#include "ItemGold.h"
 
 // Constructors/Destructors
 //  
 
-Tile::Tile () {
+Tile::Tile (char symbol) {
 }
 
 Tile::~Tile () { }
@@ -37,7 +38,8 @@ Tile::~Tile () { }
     }
     if(targetTile->isGold() && occupyingEntity->getClassName() == 'm') {
     	int amount = targetTile->getAmount();
-    	occupyingEntity->pickUpGold(amount);
+      Player *temp = (Player *) occupyingEntity;
+    	temp->pickUpGold(amount);
     }
     else if(targetTile->isGold() && occupyingEntity->getClassName() != 'm') {
     	return 0;
@@ -81,21 +83,22 @@ Tile::~Tile () { }
   /**
    * @return string
    */
-  string Tile::getEntity ()
+  std::string Tile::getEntity ()
   {
 
   }
   bool Tile::isPassable() {
-  	return isPassable;
+  	return passable;
   }
   bool Tile::isGold() {
   	return occupyingEntity->getClassName() == 'g';
   }
-  string Tile::usePotion(Player* play) {
-
+  std::string Tile::usePotion(Player* play){
+    return "";
   }
   int Tile::getAmount() {
-  	return occupyingEntity->getValue();
+    ItemGold *temp = (ItemGold *) occupyingEntity;
+  	return temp->getValue();
   }
 
 

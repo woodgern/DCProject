@@ -4,15 +4,14 @@
 //  
 
 Elf::Elf () {
-
-	trigger = "attack";
+	triggerAction = 'a';
 
 }
 
 Elf::~Elf () { }
 
 
-void applyAbility (char trigger, Character actingCharacter, Character targetCharacter)
+void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
   {
   	
   }

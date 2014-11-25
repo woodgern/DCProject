@@ -8,10 +8,10 @@
  /**
    * @param  trigger
    */
-  void Character::applyAbility (string trigger, Character* target)
+  void Character::applyAbility (std::string trigger, Character *target)
   {
   	if(specialAbility != NULL) {
-  		specialAbility.applyAbility(trigger,this, target);
+  		specialAbility->applyAbility(trigger,this, target);
   	}
   }
 
@@ -32,7 +32,7 @@
    * @return string
    * @param  target
    */
-  string Character::attack (Character * target)
+  std::string Character::doCombat (Character *target)
   {
     int acc = this->getAccuracy();
     int attk = this->getAttack();
@@ -65,7 +65,7 @@
   /**
    * @return string
    */
-  string Character::getRace ()
+  std::string Character::getRace ()
   {
   	return race;
   }
@@ -74,9 +74,9 @@
   /**
    * @return int
    */
-  int Character::baseDefense ()
+  int Character::getHealth()
   {
-  	return baseDefense;
+  	return health;
   }
 
 

@@ -3,10 +3,8 @@
 #define TILE_H
 
 #include <string>
-#include vector
-
-
-
+#include "Entity.h"
+#include "Player.h"
 /**
   * class Tile
   * 
@@ -14,97 +12,40 @@
 
 class Tile
 {
-  bool isPassable;
+  bool passable;
   char symbol;
   int xLoc;
   int yLoc;
-  Entity occupyingEntity;
+  Entity *occupyingEntity;
 public:
   bool isStairs;
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
-  Tile ();
-
-  /**
-   * Empty Destructor
-   */
+  Tile (char symbol);
   ~Tile ();
+  bool addEntity (Entity* toPlace);
 
-  // Static Public attributes
-  //  
+  int moveEntity (Tile* targetTile);
 
-  // Public attributes
-  //  
-
-  
-
-  
-
-
-  /**
-   * @return bool
-   * @param  toPlace
-   */
-  bool addEntity (Entity* toPlace)
-  {
-  }
-
-
-  /**
-   * @return int
-   * @param  targetTile
-   */
-  int moveEntity (Tile* targetTile)
-  {
-  }
-
-
-  /**
-   */
-  void removeEntity ()
-  {
-  }
-
-
+  void removeEntity ();
   /**
    * @return bool
    */
-  bool isOccupied ()
-  {
-  }
+  bool isOccupied ();
 
 
   /**
    * @return char
    */
-  char getSymbol ()
-  {
-  }
+  char getSymbol ();
 
 
   /**
    * @return string
    */
-  string getEntity ()
-  {
-
-  }
-
-  bool isPassable() {
-  }
-  bool isGold() {
-  }
-  int getAmount() {
-    
-  }
-  void usePotion(Player* play) {
-
-  }
+  std::string getEntity ();
+  bool isPassable();
+  bool isGold();
+  int getAmount();
+  std::string usePotion(Player* play);
 };
 
 #endif // TILE_H

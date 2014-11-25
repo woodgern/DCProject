@@ -3,13 +3,14 @@
 #define TROLL_H
 
 #include <string>
+#include "Ability.h"
 
 /**
   * class Troll
   * 
   */
 
-class Troll
+class Troll : public Ability
 {
 public:
 
@@ -48,7 +49,7 @@ public:
    * @param  actingCharacter
    * @param  targetCharacter
    */
-  void applyAbility (char trigger, Character actingCharacter, Character targetCharacter)
+  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
   {
   }
 
