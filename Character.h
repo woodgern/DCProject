@@ -89,7 +89,7 @@ public:
    * @return int
    * @param  accuracy
    */
-  int applyHit (int accuracy)
+  void applyHit (int accuracy)
   {
   }
 
@@ -121,6 +121,15 @@ public:
   {
   }
 
+  int getDefense() {
+
+  }
+  int getAttack() {
+
+  }
+  int getAccuracy() {
+
+  }
 
 
 

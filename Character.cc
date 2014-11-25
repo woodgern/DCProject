@@ -1,43 +1,9 @@
 #include "Character.h"
-
+#include <cmath>
+#include <cstdlib>
 // Constructors/Destructors
 //  
 
-
-/*Character::Character (string race) {
-	this->race = race;
-	symbol = 
-	if(race == "") {
-		specialAbility = new Orc();
-	}
-	else if(race == "") {
-		specialAbility = new Drow();
-	}
-	else if(race == "") {
-		specialAbility = new Vampire();
-	}
-	else if(race == "") {
-		specialAbility = new Troll();
-	}
-	else if(race == "") {
-		specialAbility = new Halfling();
-	}
-	else if(race == "") {
-		specialAbility = new Elf();
-	}
-	else if(race == "") {
-		specialAbility = new Goblin();
-	}
-	else {
-		specialAbility = NULL;
-	}
-}*/
-
-Character::~Character () {
-	if(specialAbility != NULL) {
-		delete specialAbility;
-	} 
-}
 
  /**
    * @param  trigger
@@ -66,9 +32,20 @@ Character::~Character () {
    * @return string
    * @param  target
    */
-  string Character::attack (Character target)
+  string Character::attack (Character * target)
   {
-
+    int acc = this->getAccuracy();
+    int attk = this->getAttack();
+    int def = target->getDefense();
+    int damage = ceil((((double)100)/((double)def + 100)) * ((double)attk + 100));
+    int random = (rand() % 100) + 1;
+    if(random < acc) {
+      target->applyHit(damage);
+    }
+    else {
+      //missed
+    }
+    return "Yo you attacked it";
   }
 
 
@@ -76,11 +53,13 @@ Character::~Character () {
    * @return int
    * @param  accuracy
    */
-  int Character::applyHit (int accuracy)
+  void Character::applyHit (int damage)
   {
-  	
+  	health -= damage;
+    if(health < 0) {
+      health = 0;
+    }
   }
-
 
 
   /**
@@ -120,7 +99,19 @@ Character::~Character () {
   	}
   	else if(type == 2 || type == 5) {
   		health += potion->getPotency();
+      if(health < 0) {
+        health = 0;
+      }
   	}
+  }
+  int Character::getDefense() {
+    return defense;
+  }
+  int Character::getAttack() {
+    return attack;
+  }
+  int Character::getAccuracy() {
+    return accuracy;
   }
 
 
