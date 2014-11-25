@@ -89,21 +89,6 @@
 
   }
 
-  void Character::usePotion(ItemPotion * potion) {
-  	int type = potion->getType();
-  	if(type == 0 || type == 3) {
-  		attack += potion->getPotency();
-  	}
-  	else if(type == 1 || type == 4) {
-  		defense += potion->getPotency();
-  	}
-  	else if(type == 2 || type == 5) {
-  		health += potion->getPotency();
-      if(health < 0) {
-        health = 0;
-      }
-  	}
-  }
   int Character::getDefense() {
     return defense;
   }

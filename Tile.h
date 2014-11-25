@@ -67,7 +67,7 @@ public:
    * @return bool
    * @param  toPlace
    */
-  bool addEntity (Entity toPlace)
+  bool addEntity (Entity* toPlace)
   {
   }
 
@@ -76,7 +76,7 @@ public:
    * @return int
    * @param  targetTile
    */
-  int moveEntity (Tile targetTile)
+  int moveEntity (Tile* targetTile)
   {
   }
 

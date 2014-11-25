@@ -117,9 +117,6 @@ public:
   }
 
 
-  void usePotion()
-  {
-  }
 
   int getDefense() {
 
