@@ -4,20 +4,19 @@
 //  
 
 Vampire::Vampire () {
+	trigger = 'h';
 }
 
-Vampire::~Vampire () { }
-
-//  
-// Methods
-//  
-
-
-// Accessor methods
-//  
-
-
-// Other methods
-//  
+  
+void Vampire::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+{
+	if(trigger == this->trigger) {
+		int dwarf = -1;
+		if(targetCharacter->getSymbol() == 'W') {
+			dwarf = 1;
+		}
+		actingCharacter->applyHit(dwarf * 5);
+	}
+}
 
 

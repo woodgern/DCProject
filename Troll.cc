@@ -4,20 +4,14 @@
 //  
 
 Troll::Troll () {
+	trigger = 't';
 }
 
-Troll::~Troll () { }
-
-//  
-// Methods
-//  
-
-
-// Accessor methods
-//  
-
-
-// Other methods
-//  
+void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+  {
+  	if(this->trigger = trigger) {
+  		actingCharacter->applyHit(-5);
+  	}
+  }  
 
 

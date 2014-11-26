@@ -4,24 +4,14 @@
 //  
 
 Goblin::Goblin () {
+	trigger = 'k';
 }
-
-Goblin::~Goblin () { }
 
 void Goblin::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
   {
-  	
+  	if(this->trigger == trigger) {
+  		actingCharacter->pickUpGold(5);
+  	}
   }
-//  
-// Methods
-//  
-
-
-// Accessor methods
-//  
-
-
-// Other methods
-//  
 
 

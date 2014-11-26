@@ -15,7 +15,6 @@ class Drow : public Ability
 {
 public:
   Drow ();
-  virtual ~Drow ();
   /**
    * @param  trigger
    * @param  actingCharacter

@@ -8,7 +8,6 @@ Drow::Drow () {
 	triggerAction = 'p';
 }
 
-Drow::~Drow () { }
  void Drow::applyAbility (char trigger, Player* actingCharacter, int type)
   {
   	if(trigger = this->triggerAction) {

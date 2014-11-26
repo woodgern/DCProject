@@ -89,7 +89,7 @@ void Player::pickUpGold (int amountToAdd)
    */
   char Player::getClassName ()
   {
-  	return 'P';
+  	return 'p';
   }
 
 
