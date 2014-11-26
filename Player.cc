@@ -31,6 +31,13 @@ Player::Player (std::string race) {
 	}
 }
 
+Player::~Player(){
+  
+}
+
+void Player::setPosition(int x, int y){
+  xLoc = x; yLoc = y;
+}
 
 void Player::pickUpGold (int amountToAdd)
   {

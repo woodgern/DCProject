@@ -8,19 +8,6 @@ initAttributes();
 }
 
 Chamber::~Chamber () { }
-
-//  
-// Methods
-//  
-
-
-// Accessor methods
-//  
-
-
-// Other methods
-//  
-
 void Chamber::initAttributes () {
 }
 

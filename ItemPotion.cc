@@ -10,7 +10,9 @@ ItemPotion::ItemPotion (char attrib, int pot) {
 	potency = pot;
 }
 
-
+ItemPotion::~ItemPotion(){
+  
+}
 
 char ItemPotion::getClassName ()
   {

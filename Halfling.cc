@@ -8,16 +8,8 @@ Halfling::Halfling () {
 
 Halfling::~Halfling () { }
 
-//  
-// Methods
-//  
-
-
-// Accessor methods
-//  
-
-
-// Other methods
-//  
-
+void Halfling::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+  {
+  	
+  }
 

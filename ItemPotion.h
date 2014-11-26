@@ -16,7 +16,7 @@ class ItemPotion : public Item
   int potency;
 public:
   ItemPotion (char atrb, int pot);
-  virtual ~ItemPotion ();
+  ~ItemPotion ();
   char getClassName ();
   char getSymbol ();
   std::string getDescription ();

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-TextDisplay::TextDisplay(Tile *newMap[25][79], Player *player){
+TextDisplay::TextDisplay(Tile ***newMap, Player *player){
 	this->map = newMap;
 	this->player = player;
 }
@@ -31,4 +31,8 @@ void TextDisplay::drawStatus(string action, int floorCount){
 	cout << "Atk: " << player->getAttack() << endl;
 	cout << "Def: " << player->getDefense() << endl;
 	cout << "Action: " << action << endl;
+}
+
+TextDisplay::~TextDisplay(){
+
 }

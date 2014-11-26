@@ -8,6 +8,10 @@ Goblin::Goblin () {
 
 Goblin::~Goblin () { }
 
+void Goblin::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+  {
+  	
+  }
 //  
 // Methods
 //  

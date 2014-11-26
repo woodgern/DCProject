@@ -20,25 +20,8 @@ class Player : public Character
   int xLoc;
   int yLoc;
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
   Player (std::string race);
-
-  /**
-   * Empty Destructor
-   */
   ~Player ();
-
- 
-  /**
-   * @param  amountToAdd
-   */
   void pickUpGold (int amountToAdd);
   int getGold ();
   bool isPotionKnown (int potionType);
@@ -46,6 +29,7 @@ public:
   char getClassName ();
   int getX();
   int getY();
+  void setPosition(int x, int y);
 
 };
 

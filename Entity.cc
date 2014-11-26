@@ -14,3 +14,7 @@ Entity::~Entity () { }
 void Entity::initAttributes () {
 }
 
+char Entity::getClassName(){
+	return 'E';
+}
+

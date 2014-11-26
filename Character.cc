@@ -1,8 +1,15 @@
 #include "Character.h"
 #include <cmath>
 #include <cstdlib>
-// Constructors/Destructors
-//
+
+  Character::Character(){
+
+  }
+
+  Character::~Character(){
+    
+  }
+
   /**
    * @return bool
    */

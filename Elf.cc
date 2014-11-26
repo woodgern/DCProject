@@ -11,7 +11,7 @@ Elf::Elf () {
 Elf::~Elf () { }
 
 
-void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+void Elf::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
   {
   	
   }

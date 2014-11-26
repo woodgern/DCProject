@@ -12,7 +12,7 @@
 using namespace std;
 
 Player *player = NULL;
-Tile *fullDungeon[5][25][79];
+Tile ****fullDungeon;
 TextDisplay *display;
 bool isQuitting = false;
 bool reRun = false;
@@ -212,11 +212,16 @@ void readInLevels(string fileName){
 }
 
 void generateLevels(){
-	for(int i = 0; i < 5; i++){
+	/*for(int i = 0; i < 5; i++){
 		Level *temp = new Level();
-		fullDungeon[i] = temp->getMap();
+		Tile *** tempMap = temp->getMap();
+		for (int j = 0; j < 25; j++){
+			for (int k = 0; k < 79; k++){
+				fullDungeon[i][j][k] = tempMap[j][k];
+			}
+		}
 		delete temp;
-	}
+	}*/
 }
 
 void execute(string &action){
@@ -285,6 +290,13 @@ void getFinalScore(){
 }
 
 int main(int argc, char* argv[]){
+	fullDungeon = new Tile ***[5];
+	for (int i = 0; i < 5; i++){
+		fullDungeon[i] = new Tile **[25];
+		for (int j =0; j < 25;j++){
+			fullDungeon[i][j] = new Tile *[79];
+		}
+	}
 	do{
 		reRun = false;
 		currentFloor = 0;

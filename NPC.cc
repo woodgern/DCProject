@@ -3,11 +3,14 @@
 // Constructors/Destructors
 //  
 
-NPC::NPC () {
+NPC::NPC (std::string type): Character()  {
 }
 
 NPC::~NPC () { }
 
+char NPC::getClassName(){
+	return 'n';
+}
 //  
 // Methods
 //  
