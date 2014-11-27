@@ -151,6 +151,9 @@ Entity *getMatchingEntity(char symbol){
  * Creates a Player of the race the player selects
  */
 void buildPlayer(){
+	if (player != NULL){
+		delete player;
+	}
 	cout << "Choose your character's race or quit:" << endl;
 	cout << "S(hade), D(row), V(ampire), T(roll), G(oblin), or Q(uit)" << endl;
 	char chosenRace;
@@ -273,7 +276,7 @@ void execute(string &action){
 		else{
 			int success = fullDungeon[currentFloor][y][x]->moveEntity(target);
 			if (success == -1){
-				if (currentFloor = 1){
+				if (currentFloor == 5){
 					isQuitting = true;
 					return;
 				}

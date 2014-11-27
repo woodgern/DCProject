@@ -118,6 +118,7 @@ Tile::~Tile () { }
       ItemPotion *temp = (ItemPotion *) occupyingEntity;
       play->applyPotion(temp);
       value = "Player uses " + temp->getDescription();
+      occupyingEntity = NULL;
     }
     return value;
   }
