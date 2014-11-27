@@ -16,7 +16,7 @@ ItemPotion::~ItemPotion(){
 
 char ItemPotion::getClassName ()
   {
-  	return 'p';
+  	return 't';
   }
   /**
    * @return string
@@ -24,22 +24,22 @@ char ItemPotion::getClassName ()
   std::string ItemPotion::getDescription ()
   {
   	if(getType() == 0) {
-  		return "";
+  		return "BA";
   	}
   	else if(getType() == 1) {
-  		return "";
+  		return "BD";
   	}
   	else if(getType() == 2) {
-  		return "";
+  		return "RH";
   	}
   	else if(getType() == 3) {
-  		return "";
+  		return "RA";
   	}
   	else if(getType() == 4) {
-  		return "";
+  		return "RD";
   	}
   	else {
-  		return "";
+  		return "PH";
   	}
   }
 

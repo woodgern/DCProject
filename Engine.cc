@@ -261,8 +261,7 @@ void execute(string &action){
 			execute(action);
 		}
 		else{
-			string potType = target->usePotion(player);
-			action = "PC uses " + potType;
+			action = target->usePotion(player);
 		}
 	}
 	else{
@@ -331,6 +330,9 @@ int main(int argc, char* argv[]){
 			action = "";
 			execute(action);
 		//	updateEnemies(action);
+			if (player->isDead()){
+				isQuitting = true;
+			}
 		}
 		if (!reRun && player != NULL){
 			getFinalScore();

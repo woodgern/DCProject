@@ -113,7 +113,13 @@ Tile::~Tile () { }
     }
   }
   std::string Tile::usePotion(Player* play){
-    return "";
+    std::string value = "";
+    if (isOccupied() && occupyingEntity->getClassName() == 't'){
+      ItemPotion *temp = (ItemPotion *) occupyingEntity;
+      play->applyPotion(temp);
+      value = "Player uses " + temp->getDescription();
+    }
+    return value;
   }
   int Tile::getAmount() {
     ItemGold *temp = (ItemGold *) occupyingEntity;

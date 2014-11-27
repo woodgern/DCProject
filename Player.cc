@@ -18,6 +18,7 @@ Player::Player (std::string race) {
   baseAttack = 100;
   baseDefense = 100;
   goldCount=5;
+  potionKnowledge = new bool[5];
 	if(race == "") {
 	}
 	else if(race == "") {
@@ -82,6 +83,7 @@ void Player::pickUpGold (int amountToAdd)
         health = 0;
       }
   	}
+    potionKnowledge[type] = true;
   }
 
 

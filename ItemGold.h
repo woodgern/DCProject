@@ -13,17 +13,8 @@
 class ItemGold : public Item
 {
   int value;
-  char symbol;
 public:
-  /**
-   * Empty Constructor
-   */
-  ItemGold ();
   ItemGold(int amount);
-
-  /**
-   * Empty Destructor
-   */
   virtual ~ItemGold ();
   /**
    * @return char
