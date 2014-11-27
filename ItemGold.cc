@@ -1,5 +1,5 @@
 #include "ItemGold.h"
-
+#include <iostream>
 // Constructors/Destructors
 //  
 
@@ -24,9 +24,6 @@ ItemGold::~ItemGold () { }
   int ItemGold::getValue ()
   {
   	return value;
-  }
-  char ItemGold::getSymbol() {
-  	return symbol;
   }
 
 void ItemGold::initAttributes () {

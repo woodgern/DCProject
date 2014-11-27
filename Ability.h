@@ -3,7 +3,7 @@
 #define ABILITY_H
 
 #include <string>
-class Character;
+#include "Character.h"
 
 /**
   * class Ability

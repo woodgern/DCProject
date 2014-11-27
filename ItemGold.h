@@ -25,18 +25,12 @@ public:
    * Empty Destructor
    */
   virtual ~ItemGold ();
-
-  char getSymbol();
   /**
    * @return char
    */
   char getClassName ();
 
   int getValue ();
-
-  void setValue (int new_var)   {
-      value = new_var;
-  }
 private:
 
 

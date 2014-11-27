@@ -18,7 +18,6 @@ public:
   ItemPotion (char atrb, int pot);
   ~ItemPotion ();
   char getClassName ();
-  char getSymbol ();
   std::string getDescription ();
   int getType ();
 

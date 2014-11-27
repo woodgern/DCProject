@@ -4,13 +4,13 @@
 //  
 
 Vampire::Vampire () {
-	trigger = 'h';
+	triggerAction = 'h';
 }
 
   
 void Vampire::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
 {
-	if(trigger == this->trigger) {
+	if(triggerAction == trigger) {
 		int dwarf = -1;
 		if(targetCharacter->getSymbol() == 'W') {
 			dwarf = 1;

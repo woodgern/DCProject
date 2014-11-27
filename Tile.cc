@@ -1,10 +1,15 @@
 #include "Tile.h"
 #include "ItemGold.h"
+#include <iostream>
 
 // Constructors/Destructors
 //  
 
 Tile::Tile (char symbol) {
+    this->symbol = symbol;
+    this->occupyingEntity = NULL;
+    this->isStairs = false;
+    this->passable = true;
 }
 
 Tile::~Tile () { }
@@ -15,7 +20,7 @@ Tile::~Tile () { }
    */
   bool Tile::addEntity (Entity* toPlace)
   {
-  	if(occupyingEntity != NULL) {
+  	if(occupyingEntity != NULL && !isGold()) {
   		return false;
   	}
   	occupyingEntity = toPlace;
@@ -36,17 +41,18 @@ Tile::~Tile () { }
     else if(targetTile->isStairs) {
     	return -1;
     }
-    if(targetTile->isGold() && occupyingEntity->getClassName() == 'm') {
+    if(targetTile->isGold() && isOccupied() && occupyingEntity->getClassName() == 'p') {
     	int amount = targetTile->getAmount();
       Player *temp = (Player *) occupyingEntity;
     	temp->pickUpGold(amount);
     }
-    else if(targetTile->isGold() && occupyingEntity->getClassName() != 'm') {
+    else if(targetTile->isGold() && isOccupied() && occupyingEntity->getClassName() != 'p') {
     	return 0;
     }
+    
     targetTile->addEntity(occupyingEntity);
     occupyingEntity = NULL;
-
+    return 1;
   }
 
 
@@ -76,7 +82,15 @@ Tile::~Tile () { }
    */
   char Tile::getSymbol ()
   {
-    return occupyingEntity->getSymbol();
+    if (occupyingEntity != NULL){
+      return occupyingEntity->getSymbol();
+    }
+    else if (isStairs){
+      return '\\';
+    }
+    else{
+      return this->symbol;
+    }
   }
 
 
@@ -91,7 +105,12 @@ Tile::~Tile () { }
   	return passable;
   }
   bool Tile::isGold() {
-  	return occupyingEntity->getClassName() == 'g';
+    if (isOccupied()){
+  	 return occupyingEntity->getClassName() == 'g';
+    }
+    else{
+      return false;
+    }
   }
   std::string Tile::usePotion(Player* play){
     return "";

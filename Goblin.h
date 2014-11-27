@@ -4,6 +4,7 @@
 
 #include <string>
 #include "Ability.h"
+#include "Player.h"
 
 /**
   * class Goblin
@@ -14,8 +15,7 @@ class Goblin : public Ability
 {
 public:
   Goblin ();
-  virtual ~Goblin ();
-  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter);
+  void applyAbility (char trigger, Player *actingCharacter, Character *targetCharacter);
 };
 
 #endif // GOBLIN_H

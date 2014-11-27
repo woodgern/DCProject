@@ -14,14 +14,9 @@ class Vampire : public Ability
 {
 public:
 
-  
   Vampire ();
 
-  
-  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
-  {
-
-  }
+  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter);
 
 };
 

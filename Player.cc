@@ -17,6 +17,7 @@ Player::Player (std::string race) {
   accuracy=100;
   baseAttack = 100;
   baseDefense = 100;
+  goldCount=5;
 	if(race == "") {
 	}
 	else if(race == "") {

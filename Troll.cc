@@ -4,12 +4,12 @@
 //  
 
 Troll::Troll () {
-	trigger = 't';
+	triggerAction = 't';
 }
 
-void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+void Troll::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
   {
-  	if(this->trigger = trigger) {
+  	if(this->triggerAction == trigger) {
   		actingCharacter->applyHit(-5);
   	}
   }  

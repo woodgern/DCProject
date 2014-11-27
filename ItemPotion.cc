@@ -18,17 +18,6 @@ char ItemPotion::getClassName ()
   {
   	return 'p';
   }
-
-
-  /**
-   * @return char
-   */
-  char ItemPotion::getSymbol ()
-  {
-  	return symbol;
-  }
-
-
   /**
    * @return string
    */

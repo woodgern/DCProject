@@ -4,12 +4,12 @@
 //  
 
 Goblin::Goblin () {
-	trigger = 'k';
+	triggerAction = 'k';
 }
 
-void Goblin::applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+void Goblin::applyAbility (char trigger, Player *actingCharacter, Character *targetCharacter)
   {
-  	if(this->trigger == trigger) {
+  	if(this->triggerAction == trigger) {
   		actingCharacter->pickUpGold(5);
   	}
   }

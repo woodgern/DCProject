@@ -14,8 +14,6 @@ class Tile
 {
   bool passable;
   char symbol;
-  int xLoc;
-  int yLoc;
   Entity *occupyingEntity;
 public:
   bool isStairs;

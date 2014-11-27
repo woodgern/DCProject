@@ -4,6 +4,7 @@
 #include "Tile.h"
 #include "Level.h"
 #include "ItemPotion.h"
+#include "ItemGold.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -75,7 +76,7 @@ void findPlayer(){
 }
 
 void changeFloors(){
-	delete display;
+	display = NULL;
 	currentFloor++;
 	display = new TextDisplay(fullDungeon[currentFloor], player);
 	findPlayer();
@@ -132,16 +133,16 @@ Entity *getMatchingEntity(char symbol){
 		entity = new ItemPotion('d', -5);
 	}
 	else if (symbol == '6'){
-		//entity = new ItemGold(2);
+		entity = new ItemGold(2);
 	}
 	else if (symbol == '7'){
-		//entity = new ItemGold(1);
+		entity = new ItemGold(1);
 	}
 	else if (symbol == '8'){
-		//entity = new ItemGold(4);
+		entity = new ItemGold(4);
 	}
 	else if (symbol == '9'){
-		//entity = new ItemGold(6);
+		entity = new ItemGold(6);
 	}
 	return entity;
 }
@@ -177,16 +178,16 @@ void buildPlayer(){
 
 void readInLevels(string fileName){
 	string currentLine;
-	stringstream parser;
 	Tile *temp;
 	char tileSymbol;
 	ifstream toLoad(fileName.c_str());
 	for(int i = 0; i < 5; i++){
 		for(int j = 0; j < 25; j++){
+			stringstream parser;
 			getline(toLoad, currentLine);
 			parser.str(currentLine);
 			int k = 0;
-			while (parser >> tileSymbol){
+			while (parser.get(tileSymbol)){
 				if (tileSymbol == ' ' ||
 					tileSymbol == '.' ||
 					tileSymbol == '-' ||
@@ -233,8 +234,9 @@ void execute(string &action){
 	int y = player->getY();
 
 	if (stream.peek() == 'r'){
-		isQuitting == true;
+		isQuitting = true;
 		reRun = true;
+		return;
 	}
 	else if (stream.peek() == 'a'){
 		stream.ignore();
@@ -272,8 +274,13 @@ void execute(string &action){
 		else{
 			int success = fullDungeon[currentFloor][y][x]->moveEntity(target);
 			if (success == -1){
+				if (currentFloor = 1){
+					isQuitting = true;
+					return;
+				}
 				changeFloors();
 			}
+			findPlayer();
 		}
 	}
 }
@@ -287,6 +294,13 @@ void getFinalScore(){
 	if (player->getRace() == "shade"){
 		score *= 1.5;
 	}
+	cout << "Final score: " << score << endl;
+	cout << "Play again? y(es), n(o)" << endl;
+	char choice;
+	cin >> choice;
+	if (choice == 'y'){
+		reRun = true;
+	}
 }
 
 int main(int argc, char* argv[]){
@@ -298,6 +312,7 @@ int main(int argc, char* argv[]){
 		}
 	}
 	do{
+		isQuitting = false;
 		reRun = false;
 		currentFloor = 0;
 		string action = "";
@@ -315,7 +330,7 @@ int main(int argc, char* argv[]){
 			display->draw(action, currentFloor);
 			action = "";
 			execute(action);
-			updateEnemies(action);
+		//	updateEnemies(action);
 		}
 		if (!reRun && player != NULL){
 			getFinalScore();

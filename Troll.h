@@ -16,9 +16,7 @@ public:
   
   Troll ();
 
-  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
-  {
-  }
+  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter);
 
 
 };
