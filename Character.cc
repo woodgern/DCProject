@@ -28,12 +28,12 @@
    */
   std::string Character::doCombat (Character *target)
   {
-    int ev = this->getEvasive();
+    int ev = target->getEvasive();
     int attk = this->getAttack();
     int def = target->getDefense();
     int damage = ceil((((double)100)/((double)def + 100)) * ((double)attk + 100));
     int random = (rand() % 100) + 1;
-    if(random < acc) {
+    if(random < (100 - ev)) {
       target->applyHit(damage);
     }
     else {
@@ -52,6 +52,9 @@
   	health -= damage;
     if(health < 0) {
       health = 0;
+    }
+    else if(health > maxHealth) {
+      health = maxHealth;
     }
   }
 

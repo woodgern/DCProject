@@ -37,7 +37,7 @@ public:
   void resetStats ();
   int getDefense();
   int getAttack();
-  int getAccuracy();
+  int getEvasive();
 };
 
 #endif // CHARACTER_H

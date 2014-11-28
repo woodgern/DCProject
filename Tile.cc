@@ -9,7 +9,12 @@ Tile::Tile (char symbol) {
     this->symbol = symbol;
     this->occupyingEntity = NULL;
     this->isStairs = false;
-    this->passable = true;
+    if(symbol == '#' || symbol == '.' || symbol == '+') {
+      this->passable = true; 
+    }
+    else {
+      this->passable = false;
+    }
 }
 
 Tile::~Tile () { }
@@ -47,8 +52,8 @@ Tile::~Tile () { }
       Player *temp = (Player *) occupyingEntity;
     	temp->pickUpGold(amount);
     }
-    else if(targetTile->isGold() && isOccupied() && occupyingEntity->getClassName() != 'p') {
-    	return 0;
+    else if(targetTile->isOccupied()) {
+      return 0;
     }
     
     targetTile->addEntity(occupyingEntity);

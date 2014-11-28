@@ -1,9 +1,5 @@
 #include "Player.h"
-#include "Drow.h"
-#include "Orc.h"
-#include "Troll.h"
-#include "Vampire.h"
-#include "Goblin.h"
+#include <climits>
 
 // Constructors/Destructors
 //  
@@ -11,26 +7,40 @@
 Player::Player (std::string race) {
 	this->race = race;
 	symbol = '@';
-  health=100;
-  attack=100;
-  defense=100;
-  accuracy=100;
-  baseAttack = 100;
-  baseDefense = 100;
   goldCount = 0;
   potionKnowledge = new bool[5];
-	if(race == "") {
+	if(race == "shade") {
+    baseAttack = 25;
+    baseDefense = 25;
+    maxHealth = 125;
 	}
-	else if(race == "") {
+	else if(race == "drow") {
+    baseAttack = 25;
+    baseDefense = 15;
+    maxHealth = 150;
 	}
-	else if(race == "") {
+	else if(race == "vampire") {
+    baseAttack = 25;
+    baseDefense = 25;
+    health = 50;
+    maxHealth = INT_MAX;
 	}
-	else if(race == "") {
+	else if(race == "troll") {
+    baseAttack = 25;
+    baseDefense = 15;
+    maxHealth = 120;
 	}
-	else if(race == "") {
+	else if(race == "goblin") {
+    baseAttack = 15;
+    baseDefense = 20;
+    maxHealth = 110;
 	}
-	else {
-	}
+  if(race != "vampire") {
+    health = maxHealth;
+  }
+  attack = baseAttack;
+  defense = baseDefense;
+  evasive = 50;
 }
 
 Player::~Player(){
@@ -71,16 +81,23 @@ void Player::pickUpGold (int amountToAdd)
    */
   void Player::applyPotion(ItemPotion *potion) {
   	int type = potion->getType();
+    int factor = 1;
+    if(race == "drow") {
+        factor = 1.5;
+    }
   	if(type == 0 || type == 3) {
-  		attack += potion->getPotency();
+  		attack += potion->getPotency() * factor;
   	}
   	else if(type == 1 || type == 4) {
-  		defense += potion->getPotency();
+  		defense += potion->getPotency() * factor;
   	}
   	else if(type == 2 || type == 5) {
-  		health += potion->getPotency();
+  		health += potion->getPotency() * factor;
       if(health < 0) {
         health = 0;
+      }
+      else if(health > maxHealth) {
+        health = maxHealth;
       }
   	}
     potionKnowledge[type] = true;
