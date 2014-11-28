@@ -1,48 +1,33 @@
-
-#ifndef ABILITY_H
-#define ABILITY_H
-
 #include <string>
 #include "Character.h"
 
-/**
-  * class Ability
-  * 
-  */
-
-class Ability
-{
-protected:
-  void initAttributes () ;
-  char triggerAction;
-public:
-  Ability ();
-  virtual ~Ability ();
-
-  /**
-   * @param  trigger
-   * @param  actingCharacter
-   * @param  targetCharacter
-   */
-  virtual void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
+void applyAbility (char trigger, string race, Player *actingCharacter = NULL, Character *targetCharacter = NULL)
   {
-  }
+    if(trigger == 'k') {
 
-  /**
-   * Set the value of triggerAction
-   * @param new_var the new value of triggerAction
-   */
-  void setTriggerAction (char new_var)   {
-      triggerAction = new_var;
-  }
+      if(race == "goblin") {
+        actingCharacter->pickUpGold(5);
+      }
 
-  /**
-   * Get the value of triggerAction
-   * @return the value of triggerAction
-   */
-  char getTriggerAction ()   {
-    return triggerAction;
-  }
-};
+    }
+    else if(trigger == 't') {
 
-#endif // ABILITY_H
+      if(race == "troll") {
+        actingCharacter->applyHit(-5);
+      }
+
+    }
+    else if(trigger == 'h') {
+      if(race == "vampire") {  
+        int dwarf = -1;
+        if(targetCharacter->getSymbol() == 'W') {
+          dwarf = 1;
+        }
+        actingCharacter->applyHit(dwarf * 5);
+      } 
+      else if(race == "elf") {
+        actingCharacter->doCombat(targetCharacter);
+      }
+
+    }
+  }
