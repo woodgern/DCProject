@@ -36,10 +36,6 @@ public:
   char getSymbol ();
 
 
-  /**
-   * @return string
-   */
-  std::string getEntity ();
   bool isPassable();
   bool isNPC();
   bool isGold();

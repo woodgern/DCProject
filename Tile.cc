@@ -35,7 +35,8 @@ Tile::~Tile () { }
    //also adds gold if the tile is trying to be moved to by a player
   int Tile::moveEntity (Tile* targetTile)
   {
-    if((targetTile->isOccupied() && (!targetTile->isGold() && occupyingEntity->getClassName() != 'm')) || !targetTile->isPassable()) {
+    if((targetTile->getSymbol() != '.' && isOccupied() && occupyingEntity->getClassName() != 'p') || 
+      !targetTile->isPassable()) {
     	return 0;
     }
     else if(targetTile->isStairs) {
@@ -93,14 +94,6 @@ Tile::~Tile () { }
     }
   }
 
-
-  /**
-   * @return string
-   */
-  std::string Tile::getEntity ()
-  {
-
-  }
   bool Tile::isPassable() {
   	return passable;
   }
@@ -112,11 +105,12 @@ Tile::~Tile () { }
       return false;
     }
   }
-  bool isNPC() {
-    if(occupyingEntity->getClassName() == 'n') {
+  bool Tile::isNPC() {
+    if(occupyingEntity != NULL && occupyingEntity->getClassName() == 'n') {
       return true;
     }
   }
+
   std::string Tile::usePotion(Player* play){
     std::string value = "";
     if (isOccupied() && occupyingEntity->getClassName() == 't'){
@@ -132,7 +126,7 @@ Tile::~Tile () { }
   	return temp->getValue();
   }
 
-  Entity* getEntity() {
+  Entity* Tile::getEntity() {
     return occupyingEntity;
   }
 
