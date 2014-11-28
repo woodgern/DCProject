@@ -16,7 +16,6 @@ class TextDisplay
 
     public:
     TextDisplay(Tile ***newMap, Player *player);
-    ~TextDisplay ();
 
     void draw(std::string action, int floorCount);
 };

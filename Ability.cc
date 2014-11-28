@@ -1,5 +1,6 @@
 #include "Ability.h"
 #include "Player.h"
+
   void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter = NULL)
   {
     if(trigger == 'k') {
@@ -20,7 +21,7 @@
     else if(trigger == 'h') {
       if(actingCharacter->getRace() == "vampire") {  
         int dwarf = -1;
-        if(targetCharacter->getSymbol() == 'W') {
+        if(targetCharacter->getRace() == "dwarf") {
           dwarf = 1;
         }
         actingCharacter->applyHit(dwarf * 5);

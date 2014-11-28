@@ -17,9 +17,9 @@ void TextDisplay::draw (string action, int floorCount){
 void TextDisplay::drawMap(){
 	for(int i = 0; i < 25; i++){
 		for(int j = 0; j < 79; j++){
-			cerr << map[i][j]->getSymbol();
+			cout << map[i][j]->getSymbol();
 		}
-		cerr << endl;
+		cout << endl;
 	}
 }
 
@@ -31,8 +31,4 @@ void TextDisplay::drawStatus(string action, int floorCount){
 	cout << "Atk: " << player->getAttack() << endl;
 	cout << "Def: " << player->getDefense() << endl;
 	cout << "Action: " << action << endl;
-}
-
-TextDisplay::~TextDisplay(){
-
 }

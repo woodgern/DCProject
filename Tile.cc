@@ -17,7 +17,11 @@ Tile::Tile (char symbol) {
     }
 }
 
-Tile::~Tile () { }
+Tile::~Tile () {
+  if (occupyingEntity != NULL){
+    delete occupyingEntity;
+  }
+}
 
 /**
    * @return bool

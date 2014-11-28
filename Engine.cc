@@ -352,5 +352,18 @@ int main(int argc, char* argv[]){
 			getFinalScore();
 		}
 	}while (reRun);
+	for (int i = 0; i < 5; i++){
+		for (int j =0; j < 25;j++){
+			for (int k = 0; k < 79; k++){
+				if (fullDungeon[i][j][k] != NULL){
+					delete fullDungeon[i][j][k];
+				}
+			}
+			delete fullDungeon[i][j];
+		}
+		delete fullDungeon[i];
+	}
+	delete fullDungeon;
+	delete display;
 	return 0;
 }
