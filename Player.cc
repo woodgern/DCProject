@@ -44,7 +44,7 @@ Player::Player (std::string race) {
 }
 
 Player::~Player(){
-  
+  delete []potionKnowledge;
 }
 
 void Player::setPosition(int x, int y){

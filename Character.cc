@@ -28,6 +28,21 @@
    */
   std::string Character::doCombat (Character *target)
   {
+    string message = "";
+    string attacker;
+    string defender;
+    if(this->getSymbol() == '@') {
+      attacker = "PC";
+    }
+    else {
+      attacker = this->getSymbol();
+    }
+    if(target->getSymbol() == '@') {
+      defender = "PC";
+    }
+    else {
+      defender = target->getSymbol();
+    }
     int ev = target->getEvasive();
     int attk = this->getAttack();
     int def = target->getDefense();
@@ -38,11 +53,13 @@
     int random = (rand() % 100) + 1;
     if(random < (100 - ev)) {
       target->applyHit(damage);
+      message = attacker + " deals " + damage + " damage to " + defender;
     }
     else {
-      //missed
+      message = attacker + " missed " + defender;
     }
-    return "Yo you attacked it";
+    
+    return message;
   }
 
 
