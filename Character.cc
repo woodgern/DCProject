@@ -32,6 +32,9 @@
     int attk = this->getAttack();
     int def = target->getDefense();
     int damage = ceil((((double)100)/((double)def + 100)) * ((double)attk + 100));
+    if(race == "orc" && target->getRace() == "goblin") {
+      damage *= 1.5;
+    }
     int random = (rand() % 100) + 1;
     if(random < (100 - ev)) {
       target->applyHit(damage);
