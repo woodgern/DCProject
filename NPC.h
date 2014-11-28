@@ -23,7 +23,6 @@ class NPC : public Character
 public:
   NPC ();
   NPC(std::string type);
-  virtual ~NPC ();
   void onDeath ();
   char getClassName ();
 };

@@ -18,12 +18,12 @@ protected:
   int health;
   int attack;
   int defense;
-  int accuracy;
+  int evasive;
   std::string race;
   int baseDefense;
   int baseAttack;
   int maxHealth;
-  int baseAccuracy;
+  int baseEv;
 
 public:
   Character ();

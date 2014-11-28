@@ -112,6 +112,11 @@ Tile::~Tile () { }
       return false;
     }
   }
+  bool isNPC() {
+    if(occupyingEntity->getClassName() == 'n') {
+      return true;
+    }
+  }
   std::string Tile::usePotion(Player* play){
     std::string value = "";
     if (isOccupied() && occupyingEntity->getClassName() == 't'){

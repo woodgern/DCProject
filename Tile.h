@@ -41,6 +41,7 @@ public:
    */
   std::string getEntity ();
   bool isPassable();
+  bool isNPC();
   bool isGold();
   int getAmount();
   std::string usePotion(Player* play);

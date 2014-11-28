@@ -28,7 +28,7 @@
    */
   std::string Character::doCombat (Character *target)
   {
-    int acc = this->getAccuracy();
+    int ev = this->getEvasive();
     int attk = this->getAttack();
     int def = target->getDefense();
     int damage = ceil((((double)100)/((double)def + 100)) * ((double)attk + 100));
@@ -89,8 +89,8 @@
   int Character::getAttack() {
     return attack;
   }
-  int Character::getAccuracy() {
-    return accuracy;
+  int Character::getEvasive() {
+    return evasive;
   }
 
 
