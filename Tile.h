@@ -45,6 +45,7 @@ public:
   bool isGold();
   int getAmount();
   std::string usePotion(Player* play);
+  Entity* getEntity();
 };
 
 #endif // TILE_H

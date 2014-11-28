@@ -132,4 +132,8 @@ Tile::~Tile () { }
   	return temp->getValue();
   }
 
+  Entity* getEntity() {
+    return occupyingEntity;
+  }
+
 
