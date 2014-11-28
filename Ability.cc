@@ -1,33 +1,31 @@
-
-
-
-
-  
-  void applyAbility (char trigger = '', string race = "", Player *actingCharacter = NULL, Character *targetCharacter = NULL)
+#include "Ability.h"
+#include "Player.h"
+  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter = NULL)
   {
     if(trigger == 'k') {
 
-      if(race == "goblin") {
-  		  actingCharacter->pickUpGold(5);
+      if(actingCharacter->getRace() == "goblin") {
+        Player *temp = (Player *) actingCharacter;
+  		  temp->pickUpGold(5);
   	  }
 
     }
     else if(trigger == 't') {
 
-      if(race == "troll") {
+      if(actingCharacter->getRace() == "troll") {
         actingCharacter->applyHit(-5);
       }
 
     }
     else if(trigger == 'h') {
-      if(race == "vampire") {  
+      if(actingCharacter->getRace() == "vampire") {  
         int dwarf = -1;
         if(targetCharacter->getSymbol() == 'W') {
           dwarf = 1;
         }
         actingCharacter->applyHit(dwarf * 5);
       } 
-      else if(race == "elf") {
+      else if(actingCharacter->getRace() == "elf") {
         actingCharacter->doCombat(targetCharacter);
       }
 

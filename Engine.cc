@@ -153,6 +153,7 @@ Entity *getMatchingEntity(char symbol){
 void buildPlayer(){
 	if (player != NULL){
 		delete player;
+		player = NULL;
 	}
 	cout << "Choose your character's race or quit:" << endl;
 	cout << "S(hade), D(row), V(ampire), T(roll), G(oblin), or Q(uit)" << endl;
@@ -176,6 +177,9 @@ void buildPlayer(){
 	else if (chosenRace == 'Q' || chosenRace == 'q'){
 		isQuitting = true;
 		reRun = false;
+	}
+	else{
+		buildPlayer();
 	}
 }
 
@@ -251,7 +255,13 @@ void execute(string &action){
 			execute(action);
 		}
 		else{
-			//Do combat here or whatever
+			if (target->isOccupied() && target->isNPC()){
+				Character *tempEnemy = (Character *) target->getEntity();
+				player->doCombat(tempEnemy);
+				if(tempEnemy->isDead()){
+					target->removeEntity();
+				}
+			}
 		}
 	}
 	else if (stream.peek() == 'u'){
@@ -337,6 +347,7 @@ int main(int argc, char* argv[]){
 				isQuitting = true;
 			}
 		}
+
 		if (!reRun && player != NULL){
 			getFinalScore();
 		}
