@@ -18,7 +18,6 @@ class EntityFactory
 {
 public:
   EntityFactory ();
-  virtual ~EntityFactory ();
   /**
    * @return ItemGold
    */
