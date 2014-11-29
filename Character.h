@@ -30,6 +30,7 @@ public:
   virtual ~Character ();
   bool isDead ();
   std::string doCombat (Character *target);
+  std::string doSecondCombat (Character *target);
 
   void applyHit (int accuracy);
   std::string getRace ();

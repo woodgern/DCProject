@@ -1,7 +1,7 @@
 #include "Ability.h"
 #include "Player.h"
 
-  void applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter = NULL)
+  std::string applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter = NULL)
   {
     if(trigger == 'k') {
 
@@ -26,10 +26,13 @@
         }
         actingCharacter->applyHit(dwarf * 5);
       } 
-      else if(actingCharacter->getRace() == "elf") {
-        actingCharacter->doCombat(targetCharacter);
-      }
 
     }
+    else if(trigger = 'a') {
+      if(actingCharacter->getRace() == "elf" && targetCharacter->getRace() != "drow") {
+        return " " + actingCharacter->doSecondCombat(targetCharacter);
+      }
+    }
+    return "";
   }
 
