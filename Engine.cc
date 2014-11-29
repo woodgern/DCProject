@@ -257,7 +257,7 @@ void execute(string &action){
 		else{
 			if (target->isOccupied() && target->isNPC()){
 				Character *tempEnemy = (Character *) target->getEntity();
-				player->doCombat(tempEnemy);
+				action = player->doCombat(tempEnemy);
 				if(tempEnemy->isDead()){
 					target->removeEntity();
 				}

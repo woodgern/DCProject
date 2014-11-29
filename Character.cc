@@ -1,6 +1,7 @@
 #include "Character.h"
 #include <cmath>
 #include <cstdlib>
+#include <sstream>
 
   Character::Character(){
 
@@ -28,9 +29,9 @@
    */
   std::string Character::doCombat (Character *target)
   {
-    string message = "";
-    string attacker;
-    string defender;
+    std::string message = "";
+    std::string attacker;
+    std::string defender;
     if(this->getSymbol() == '@') {
       attacker = "PC";
     }
@@ -46,19 +47,20 @@
     int ev = target->getEvasive();
     int attk = this->getAttack();
     int def = target->getDefense();
-    int damage = ceil((((double)100)/((double)def + 100)) * ((double)attk + 100));
+    int damage = ceil((((double)100)/((double)def + 100)) * ((double)attk));
     if(race == "orc" && target->getRace() == "goblin") {
       damage *= 1.5;
     }
     int random = (rand() % 100) + 1;
     if(random < (100 - ev)) {
       target->applyHit(damage);
-      message = attacker + " deals " + damage + " damage to " + defender;
+      std::ostringstream convert;   // stream used for the conversion
+      convert << damage;
+      message = attacker + " deals " + convert.str() + " damage to " + defender  + ".";
     }
     else {
-      message = attacker + " missed " + defender;
+      message = attacker + " missed " + defender + ".";
     }
-    
     return message;
   }
 
