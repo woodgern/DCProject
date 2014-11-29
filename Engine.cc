@@ -24,50 +24,105 @@ bool reRun = false;
 int currentFloor = 0;
 EntityFactory *factory;
 
-Tile * getTargetTile(string desired){
+Tile * getTargetTile(string desired, string &movement){
 	int x = player->getX();
 	int y = player->getY();
 	if (desired == "no"){
 		if (y > 0){
+			movement += "PC moved north.";
 			return fullDungeon[currentFloor][y-1][x];
 		}
 	}
 	else if (desired == "so"){
 		if (y < 24){
+			movement += "PC moved south.";
 			return fullDungeon[currentFloor][y+1][x];
 		}
 	}
 	else if (desired == "ea"){
 		if (x < 78){
+			movement += "PC moved east.";
 			return fullDungeon[currentFloor][y][x+1];
 		}
 	}
 	else if (desired == "we"){
 		if (x > 0){
+			movement += "PC moved west.";
 			return fullDungeon[currentFloor][y][x-1];
 		}
 	}
 	else if (desired == "nw"){
 		if (x > 0 && y > 0){
+			movement += "PC moved north west.";
 			return fullDungeon[currentFloor][y-1][x-1];
 		}
 	}
 	else if (desired == "ne"){
 		if (x < 78 && y > 0){
+			movement += "PC moved north east.";
 			return fullDungeon[currentFloor][y-1][x+1];
 		}
 	}
 	else if (desired == "sw"){
 		if (x > 0 && y < 24){
+			movement += "PC moved south west.";
 			return fullDungeon[currentFloor][y+1][x-1];
 		}
 	}
 	else if (desired == "se"){
 		if (x < 78 && y < 24){
+			movement += "PC moved south east.";
 			return fullDungeon[currentFloor][y+1][x+1];
 		}
 	}
 	return NULL;
+}
+
+void seeNearbyPotions(string &identified){
+	int x = player->getX();
+	int y = player->getY();
+	int unidentified = 0;
+	for(int i = -1; i <= 1; i++){
+		for(int j = -1; j <= 1; j++){
+			if ((x + i < 79 && x+i >= 0) &&
+				(y+j < 25 && y+j >= 0)){
+				Tile *temp = fullDungeon[currentFloor][y+j][x+i];
+				if (temp->isOccupied() && temp->getSymbol() == 'P'){
+					ItemPotion *pot = (ItemPotion *) temp->getEntity();
+					if (player->isPotionKnown(pot->getType())){
+						identified += " PC sees a " + pot->getDescription() + " potion nearby.";
+					}
+					else {
+						unidentified++;
+					}
+				}
+			}
+		}
+	}
+	if (unidentified != 0){
+		if (unidentified == 1){
+			identified += " PC sees an unidentified potion nearby.";
+		}
+		else{
+			ostringstream convert;
+			convert << unidentified;
+			identified += " PC sees " + convert.str() + " unidentified potions nearby.";
+		}
+	}
+}
+
+bool isDragonNearby(int x, int y){
+	for(int i = -1; i < 1; i++){
+		for(int j = -1; j < 1; j++){
+			if ((x + i < 79 && x+i >= 0) &&
+				(y+j < 25 && y+j >= 0)){
+				if (fullDungeon[currentFloor][y+i][x+i]->getSymbol() == 'D'){
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 void findPlayer(){
@@ -120,22 +175,22 @@ Entity *getMatchingEntity(char symbol){
 		entity = new NPC("halfling");
 	}
 	else if (symbol == '0'){
-		entity = new ItemPotion('h', 10);
+		entity = new ItemPotion('H', 10);
 	}
 	else if (symbol == '1'){
-		entity = new ItemPotion('a', 5);
+		entity = new ItemPotion('A', 5);
 	}
 	else if (symbol == '2'){
-		entity = new ItemPotion('d', 5);
+		entity = new ItemPotion('D', 5);
 	}
 	else if (symbol == '3'){
-		entity = new ItemPotion('h', -10);
+		entity = new ItemPotion('H', -10);
 	}
 	else if (symbol == '4'){
-		entity = new ItemPotion('a', -5);
+		entity = new ItemPotion('A', -5);
 	}
 	else if (symbol == '5'){
-		entity = new ItemPotion('d', -5);
+		entity = new ItemPotion('D', -5);
 	}
 	else if (symbol == '6'){
 		entity = new ItemGold(2);
@@ -242,6 +297,7 @@ void execute(string &action){
 	getline(cin, desiredMove);
 	stringstream stream;
 	stream << desiredMove;
+	string junk;
 	int x = player->getX();
 	int y = player->getY();
 
@@ -254,7 +310,7 @@ void execute(string &action){
 		stream.ignore();
 		string dir;
 		stream >> dir;
-		Tile *target = getTargetTile(dir);
+		Tile *target = getTargetTile(dir, junk);
 		if (target == NULL){
 			action = "";
 			execute(action);
@@ -282,7 +338,7 @@ void execute(string &action){
 		stream.ignore();
 		string dir;
 		stream >> dir;
-		Tile *target = getTargetTile(dir);
+		Tile *target = getTargetTile(dir, junk);
 		if (target == NULL || target->getSymbol() != 'P'){
 			action = "";
 			execute(action);
@@ -292,7 +348,7 @@ void execute(string &action){
 		}
 	}
 	else{
-		Tile *target = getTargetTile(desiredMove);
+		Tile *target = getTargetTile(desiredMove, action);
 		if (target == NULL){
 			action = "";
 			execute(action);
@@ -306,7 +362,13 @@ void execute(string &action){
 				}
 				changeFloors();
 			}
-			findPlayer();
+			else if (success == 0){
+				action = "";
+				execute(action);
+			}
+			else{
+				findPlayer();
+			}
 		}
 	}
 }
@@ -377,6 +439,7 @@ int main(int argc, char* argv[]){
 		string action = "";
 
 		buildPlayer();
+		action = "Player has spawned.";
 		if (argc == 2){
 			readInLevels(argv[1]);
 		}
@@ -387,6 +450,7 @@ int main(int argc, char* argv[]){
 		display = new TextDisplay(fullDungeon[currentFloor], player);
 		while (!isQuitting){
 			applyAbility('t', player, NULL);
+			seeNearbyPotions(action);
 			display->draw(action, currentFloor);
 			action = "";
 			execute(action);
