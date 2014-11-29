@@ -81,7 +81,7 @@ void Player::pickUpGold (int amountToAdd)
    */
   void Player::applyPotion(ItemPotion *potion) {
   	int type = potion->getType();
-    int factor = 1;
+    double factor = 1;
     if(race == "drow") {
         factor = 1.5;
     }

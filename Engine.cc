@@ -9,6 +9,9 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdlib>
+#include "Ability.h"
+#include "EntityFactory.h"
 
 using namespace std;
 
@@ -18,6 +21,7 @@ TextDisplay *display;
 bool isQuitting = false;
 bool reRun = false;
 int currentFloor = 0;
+EntityFactory *factory;
 
 Tile * getTargetTile(string desired){
 	int x = player->getX();
@@ -259,7 +263,13 @@ void execute(string &action){
 				Character *tempEnemy = (Character *) target->getEntity();
 				action = player->doCombat(tempEnemy);
 				if(tempEnemy->isDead()){
+					applyAbility('k', player, NULL);
+					Item * drop = factory->generateDrops(tempEnemy->getSymbol());
+					if(tempEnemy->GetSymbol() == 'H'){
+						player->pickupGold(2);
+					}
 					target->removeEntity();
+					target->addEntity(drop);
 				}
 			}
 		}
@@ -298,7 +308,35 @@ void execute(string &action){
 }
 
 void updateEnemies(string &action){
+	int playX = player->getX();
+	int playY = player->getY();
 
+	for (int i = 0; i < 25; i++){
+		for (int j = 0; j < 79; j++){
+			Tile *tile = fullDungeon[currentFloor][i][j];
+			if(tile->isOccupied() && tile->getEntity()->getClassName() == 'n'){
+				if ((i <= playY + 1 && i >= playY - 1) && (j <= playX + 1 && j >= playX - 1)){
+					Character *temp = (Character *) tile->getEntity();
+					if (action != ""){
+						action += " ";
+					}
+					action += temp->doCombat(player);
+					if (player->isDead()){
+						isQuitting = true;
+						return;
+					}
+				}
+				else if (tile->getSymbol() != 'D'){
+					int success = 0;
+					do{
+						int xMod = (rand() % 3) - 1;
+						int yMod = (rand() % 3) - 1;
+						success = tile->moveEntity(fullDungeon[currentFloor][i+yMod][j+xMod]);
+					}while(success != 1);
+				}
+			}
+		}
+	}
 }
 
 void getFinalScore(){
@@ -310,12 +348,13 @@ void getFinalScore(){
 	cout << "Play again? y(es), n(o)" << endl;
 	char choice;
 	cin >> choice;
-	if (choice == 'y'){
+	if (choice == 'y' || choice == 'Y'){
 		reRun = true;
 	}
 }
 
 int main(int argc, char* argv[]){
+	factory = new EntityFactory();
 	fullDungeon = new Tile ***[5];
 	for (int i = 0; i < 5; i++){
 		fullDungeon[i] = new Tile **[25];
@@ -339,10 +378,11 @@ int main(int argc, char* argv[]){
 		findPlayer();
 		display = new TextDisplay(fullDungeon[currentFloor], player);
 		while (!isQuitting){
+			applyAbility('t', player, NULL);
 			display->draw(action, currentFloor);
 			action = "";
 			execute(action);
-		//	updateEnemies(action);
+			updateEnemies(action);
 			if (player->isDead()){
 				isQuitting = true;
 			}
@@ -365,5 +405,6 @@ int main(int argc, char* argv[]){
 	}
 	delete []fullDungeon;
 	delete display;
+	delete factory;
 	return 0;
 }

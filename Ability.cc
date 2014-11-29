@@ -1,7 +1,7 @@
 #include "Ability.h"
 #include "Player.h"
 
-  std::string applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter = NULL)
+  std::string applyAbility (char trigger, Character *actingCharacter, Character *targetCharacter)
   {
     if(trigger == 'k') {
 

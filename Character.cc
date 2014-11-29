@@ -157,7 +157,3 @@
   int Character::getEvasive() {
     return evasive;
   }
-
-
-
-
