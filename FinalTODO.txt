@@ -1,0 +1,6 @@
+-CC game (obviously)
+-updated UML (a few changes, use the object structure after we finish to update it correctly)
+-desgin document
+ *this has no specification in the main pdf, but is refered to by this name
+ *I imagine we should take our old one and add new things where appropriate
+ *Ill probably do this on Saturday, It should not take too much effort
