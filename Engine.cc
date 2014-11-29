@@ -24,54 +24,66 @@ bool reRun = false;
 int currentFloor = 0;
 EntityFactory *factory;
 
-Tile * getTargetTile(string desired, string &movement){
+Tile * getTargetTile(string desired, string &movement, int &newX, int &newY){
 	int x = player->getX();
 	int y = player->getY();
 	if (desired == "no"){
 		if (y > 0){
 			movement += "PC moved north.";
+			newY--;
 			return fullDungeon[currentFloor][y-1][x];
 		}
 	}
 	else if (desired == "so"){
 		if (y < 24){
 			movement += "PC moved south.";
+			newY++;
 			return fullDungeon[currentFloor][y+1][x];
 		}
 	}
 	else if (desired == "ea"){
 		if (x < 78){
 			movement += "PC moved east.";
+			newX++;
 			return fullDungeon[currentFloor][y][x+1];
 		}
 	}
 	else if (desired == "we"){
 		if (x > 0){
 			movement += "PC moved west.";
+			newX--;
 			return fullDungeon[currentFloor][y][x-1];
 		}
 	}
 	else if (desired == "nw"){
 		if (x > 0 && y > 0){
 			movement += "PC moved north west.";
+			newY--;
+			newX--;
 			return fullDungeon[currentFloor][y-1][x-1];
 		}
 	}
 	else if (desired == "ne"){
 		if (x < 78 && y > 0){
 			movement += "PC moved north east.";
+			newY--;
+			newX++;
 			return fullDungeon[currentFloor][y-1][x+1];
 		}
 	}
 	else if (desired == "sw"){
 		if (x > 0 && y < 24){
 			movement += "PC moved south west.";
+			newY++;
+			newX--;
 			return fullDungeon[currentFloor][y+1][x-1];
 		}
 	}
 	else if (desired == "se"){
 		if (x < 78 && y < 24){
 			movement += "PC moved south east.";
+			newY++;
+			newX++;
 			return fullDungeon[currentFloor][y+1][x+1];
 		}
 	}
@@ -112,11 +124,35 @@ void seeNearbyPotions(string &identified){
 }
 
 bool isDragonNearby(int x, int y){
-	for(int i = -1; i < 1; i++){
-		for(int j = -1; j < 1; j++){
+	for(int i = -1; i <= 1; i++){
+		for(int j = -1; j <= 1; j++){
 			if ((x + i < 79 && x+i >= 0) &&
 				(y+j < 25 && y+j >= 0)){
-				if (fullDungeon[currentFloor][y+i][x+i]->getSymbol() == 'D'){
+				if (fullDungeon[currentFloor][y+j][x+i]->getSymbol() == 'D'){
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+bool canDragonAttack(int x, int y){
+	int playX = player->getX();
+	int playY = player->getY();
+	// Dragon is in range
+	if ((y <= playY + 1 && y >= playY - 1) &&
+		(x <= playX + 1 && x >= playX - 1)){
+		return true;
+	}
+
+	//See if horde is in range
+	for(int i = -1; i <= 1; i++){
+		for (int j = -1; j <= 1; j++){
+			if (fullDungeon[currentFloor][y+j][x+i]->getSymbol() == 'G' && 
+				((ItemGold *) fullDungeon[currentFloor][y+j][x+i]->getEntity())->getValue() == 6){
+				if ((y+j <= playY + 1 && y+j >= playY - 1) &&
+					(x+i <= playX + 1 && x+i >= playX - 1)){
 					return true;
 				}
 			}
@@ -300,7 +336,8 @@ void execute(string &action){
 	string junk;
 	int x = player->getX();
 	int y = player->getY();
-
+	int tempX = x;
+	int tempY = y;
 	if (stream.peek() == 'r'){
 		isQuitting = true;
 		reRun = true;
@@ -310,7 +347,7 @@ void execute(string &action){
 		stream.ignore();
 		string dir;
 		stream >> dir;
-		Tile *target = getTargetTile(dir, junk);
+		Tile *target = getTargetTile(dir, junk, tempX, tempY);
 		if (target == NULL){
 			action = "";
 			execute(action);
@@ -338,7 +375,7 @@ void execute(string &action){
 		stream.ignore();
 		string dir;
 		stream >> dir;
-		Tile *target = getTargetTile(dir, junk);
+		Tile *target = getTargetTile(dir, junk, tempX, tempY);
 		if (target == NULL || target->getSymbol() != 'P'){
 			action = "";
 			execute(action);
@@ -348,10 +385,16 @@ void execute(string &action){
 		}
 	}
 	else{
-		Tile *target = getTargetTile(desiredMove, action);
+		Tile *target = getTargetTile(desiredMove, action, tempX, tempY);
 		if (target == NULL){
 			action = "";
 			execute(action);
+		}
+		else if (target->isOccupied() &&
+				target->getSymbol() == 'G' &&
+				((ItemGold *) target->getEntity())->getValue() == 6 &&
+				isDragonNearby(tempX, tempY)){
+			/* dragon is still alive for the horde*/
 		}
 		else{
 			int success = fullDungeon[currentFloor][y][x]->moveEntity(target);
@@ -381,7 +424,10 @@ void updateEnemies(string &action){
 		for (int j = 0; j < 79; j++){
 			Tile *tile = fullDungeon[currentFloor][i][j];
 			if(tile->isOccupied() && tile->getEntity()->getClassName() == 'n'){
-				if ((tile->getSymbol() != 'M' || hasAngeredMerchants) && (i <= playY + 1 && i >= playY - 1) && (j <= playX + 1 && j >= playX - 1)){
+				if (((tile->getSymbol() != 'M' || hasAngeredMerchants) &&
+					(i <= playY + 1 && i >= playY - 1) &&
+					(j <= playX + 1 && j >= playX - 1)) ||
+					(tile->getSymbol() == 'D' && canDragonAttack(j, i))){
 					Character *temp = (Character *) tile->getEntity();
 					if (action != ""){
 						action += " ";
