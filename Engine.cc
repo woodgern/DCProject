@@ -319,7 +319,7 @@ void updateEnemies(string &action){
 		for (int j = 0; j < 79; j++){
 			Tile *tile = fullDungeon[currentFloor][i][j];
 			if(tile->isOccupied() && tile->getEntity()->getClassName() == 'n'){
-				if ((i <= playY + 1 && i >= playY - 1) && (j <= playX + 1 && j >= playX - 1)){
+				if ((tile->getSymbol() != 'M' || hasAngeredMerchants) && (i <= playY + 1 && i >= playY - 1) && (j <= playX + 1 && j >= playX - 1)){
 					Character *temp = (Character *) tile->getEntity();
 					if (action != ""){
 						action += " ";
