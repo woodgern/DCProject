@@ -3,6 +3,7 @@
 #define ENTITYFACTORY_H
 
 #include <string>
+#include <cstdlib>
 #include "ItemGold.h"
 #include "ItemPotion.h"
 #include "NPC.h"
@@ -21,10 +22,10 @@ public:
   /**
    * @return ItemGold
    */
-  ItemGold generateGold ();
-  Item generateDrops (char killedEntity);
-  NPC generateEnemy ();
-  ItemPotion generatePotion ();
+  ItemGold* generateGold ();
+  Item* generateDrops (char killedEntity);
+  NPC* generateEnemy ();
+  ItemPotion* generatePotion ();
 };
 
 #endif // ENTITYFACTORY_H
