@@ -1,0 +1,9 @@
+-CC game (obviously)
+-updated UML (a few changes, use the object structure after we finish to update it correctly)
+-desgin document
+ *re-answer the 5 questions from before, make sure to specifiy how they are different from the original
+ *explain our implementation at a high level. This serves the purpose of an overview
+ *answer these questions:
+  >		1. What lessons did this project teach you about developing software in teams? If you worked
+		alone, what lessons did you learn about writing large programs?
+		2. What would you have done differently if you had the chance to start over?
