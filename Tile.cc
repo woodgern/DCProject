@@ -18,7 +18,7 @@ Tile::Tile (char symbol) {
 }
 
 Tile::~Tile () {
-  if (occupyingEntity != NULL){
+  if (occupyingEntity != NULL && occupyingEntity->getSymbol() != '@'){
     delete occupyingEntity;
   }
 }

@@ -18,6 +18,7 @@ using namespace std;
 Player *player = NULL;
 Tile ****fullDungeon;
 TextDisplay *display;
+bool hasAngeredMerchants = false;
 bool isQuitting = false;
 bool reRun = false;
 int currentFloor = 0;
@@ -262,11 +263,14 @@ void execute(string &action){
 			if (target->isOccupied() && target->isNPC()){
 				Character *tempEnemy = (Character *) target->getEntity();
 				action = player->doCombat(tempEnemy);
+				if(tempEnemy->getRace() == "merchant"){
+					hasAngeredMerchants = true;
+				}
 				if(tempEnemy->isDead()){
 					applyAbility('k', player, NULL);
 					Item * drop = factory->generateDrops(tempEnemy->getSymbol());
-					if(tempEnemy->GetSymbol() == 'H'){
-						player->pickupGold(2);
+					if(tempEnemy->getSymbol() == 'H'){
+						player->pickUpGold(2);
 					}
 					target->removeEntity();
 					target->addEntity(drop);
@@ -354,15 +358,19 @@ void getFinalScore(){
 }
 
 int main(int argc, char* argv[]){
+	hasAngeredMerchants = false;
 	factory = new EntityFactory();
-	fullDungeon = new Tile ***[5];
-	for (int i = 0; i < 5; i++){
-		fullDungeon[i] = new Tile **[25];
-		for (int j =0; j < 25;j++){
-			fullDungeon[i][j] = new Tile *[79];
-		}
-	}
+
 	do{
+		if (fullDungeon == NULL){
+			fullDungeon = new Tile ***[5];
+			for (int i = 0; i < 5; i++){
+				fullDungeon[i] = new Tile **[25];
+				for (int j =0; j < 25;j++){
+					fullDungeon[i][j] = new Tile *[79];
+				}
+			}
+		}
 		isQuitting = false;
 		reRun = false;
 		currentFloor = 0;
@@ -391,20 +399,32 @@ int main(int argc, char* argv[]){
 		if (!reRun && player != NULL){
 			getFinalScore();
 		}
-	}while (reRun);
-	for (int i = 0; i < 5; i++){
-		for (int j = 0; j < 25;j++){
-			for (int k = 0; k < 79; k++){
-				if (fullDungeon[i][j][k] != NULL){
-					delete fullDungeon[i][j][k];
+
+		if (fullDungeon != NULL){
+			for (int i = 0; i < 5; i++){
+				for (int j = 0; j < 25;j++){
+					for (int k = 0; k < 79; k++){
+						if (fullDungeon[i][j][k] != NULL){
+							delete fullDungeon[i][j][k];
+							fullDungeon[i][j][k] = NULL;
+						}
+					}
+					if (fullDungeon[i][j] != NULL){
+						delete []fullDungeon[i][j];
+						fullDungeon[i][j] = NULL;
+					}
+				}
+				if (fullDungeon[i] != NULL){
+					delete []fullDungeon[i];
+					fullDungeon[i] = NULL;
 				}
 			}
-			delete []fullDungeon[i][j];
+			delete []fullDungeon;
+			fullDungeon = NULL;
 		}
-		delete []fullDungeon[i];
-	}
-	delete []fullDungeon;
-	delete display;
+		delete display;
+	}while (reRun);
 	delete factory;
+	delete player;
 	return 0;
 }
