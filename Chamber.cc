@@ -73,6 +73,7 @@ void Chamber::generateEnemy(){
 }
 
 Chamber::~Chamber () {
+	delete[] contents;
 	contents = NULL;
 	delete generator;
 }

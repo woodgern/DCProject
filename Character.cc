@@ -57,7 +57,13 @@
       target->applyHit(damage);
       std::ostringstream convert;   // stream used for the conversion
       convert << damage;
-      message = attacker + " deals " + convert.str() + " damage to " + defender  + ".";
+      message = attacker + " deals " + convert.str() + " damage to " + defender;
+      if (defender != "PC"){
+        std::ostringstream healthConvert;
+        healthConvert << target->getHealth();
+        message += "(" + healthConvert.str() + " HP)";
+      }
+      message += ".";
       message += applyAbility('h', this, target);
     }
     else {

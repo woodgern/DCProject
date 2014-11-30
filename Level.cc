@@ -182,5 +182,9 @@ Level::~Level () {
 		delete chambers[i];
 	}
 	delete[] chambers;
+	for (int i = 0; i < 25; i++){
+		delete[] map[i];
+	}
+	delete[] map;
 }
 
