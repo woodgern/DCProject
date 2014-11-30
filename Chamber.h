@@ -5,6 +5,7 @@
 #include <string>
 #include "Tile.h"
 #include "Player.h"
+#include "EntityFactory.h"
 
 /**
   * class Chamber
@@ -13,24 +14,19 @@
 
 class Chamber
 {
-  Tile **Contents;
+  Tile **contents;
+  EntityFactory *generator;
+  int size;
+  int capacity;
 public:
   Chamber ();
-  virtual ~Chamber ();
-
-  /**
-   * @param  toPlace
-   */
+  ~Chamber ();
   void placePlayer (Player *toPlace);
   void generateGold ();
   void generatePotion ();
   void generateEnemy ();
   void placeStairs ();
-  void setContents (Tile new_var);
-  Tile **getContents ();
-private:
-  void initAttributes () ;
-
+  void addTile (Tile *newTile);
 };
 
 #endif // CHAMBER_H

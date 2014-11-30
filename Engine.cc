@@ -316,16 +316,15 @@ void readInLevels(string fileName){
 }
 
 void generateLevels(){
-	/*for(int i = 0; i < 5; i++){
-		Level *temp = new Level();
-		Tile *** tempMap = temp->getMap();
+	for(int i = 0; i < 5; i++){
+		Level *temp = new Level(player);
 		for (int j = 0; j < 25; j++){
 			for (int k = 0; k < 79; k++){
-				fullDungeon[i][j][k] = tempMap[j][k];
+				fullDungeon[i][j][k] = temp->getTile(k, j);
 			}
 		}
 		delete temp;
-	}*/
+	}
 }
 
 void execute(string &action){
@@ -466,6 +465,7 @@ void getFinalScore(){
 }
 
 int main(int argc, char* argv[]){
+	srand (time(NULL));
 	hasAngeredMerchants = false;
 	factory = new EntityFactory();
 

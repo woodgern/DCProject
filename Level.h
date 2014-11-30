@@ -4,6 +4,8 @@
 
 #include <string>
 #include "Chamber.h"
+#include "Tile.h"
+#include "Player.h"
 
 /**
   * class Level
@@ -12,21 +14,22 @@
 
 class Level
 {
-  Chamber *chambers;
+  Chamber **chambers;
+  Tile ***map;
+  int chamberCount;
+  int capacity;
   void generateEnemies ();
   void generatePotions ();
   void generateGold ();
   void generatePlayerAndStairs (Player *toPlace);
-  void generateEntities ();
+  void generateEntities (Player *toPlace);
   void buildLevel ();
-  void initAttributes ();
-public:
-  Level ();
-  virtual ~Level ();
-  Tile ***getMap ();
   void createChambers ();
-  void setChambers (Chamber new_var);
-  Chamber *getChambers ();
+  void addChamber(Chamber *toAdd);
+public:
+  Level (Player *toPlace);
+  virtual ~Level ();
+  Tile *getTile(int x, int y);
 };
 
 #endif // LEVEL_H
