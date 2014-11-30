@@ -118,6 +118,7 @@ Tile::~Tile () {
     if(occupyingEntity != NULL && occupyingEntity->getClassName() == 'n') {
       return true;
     }
+    return false;
   }
 
   std::string Tile::usePotion(Player* play){

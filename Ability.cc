@@ -28,7 +28,7 @@
       } 
 
     }
-    else if(trigger = 'a') {
+    else if(trigger == 'a') {
       if(actingCharacter->getRace() == "elf" && targetCharacter->getRace() != "drow") {
         return " " + actingCharacter->doSecondCombat(targetCharacter);
       }

@@ -77,7 +77,7 @@ make sure to free whatever is return by this function
 ItemPotion* EntityFactory::generatePotion () {
 	int random = rand() % 5;
 	ItemPotion* pot = NULL;
-	if(rand == 0) {
+	if(random == 0) {
 		pot = new ItemPotion('A', 5);
 	}
 	else if(random == 1) {
