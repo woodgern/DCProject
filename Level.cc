@@ -1,6 +1,7 @@
 #include "Level.h"
 #include <cstdlib>
 #include <iostream>
+#include "NPC.h"
 #include <fstream>
 #include <sstream>
 
@@ -19,7 +20,21 @@ Level::Level (Player *toPlace) {
 }
 
 void Level::generateEnemies (){
-	for (int i = 0; i < 20; i++){
+	int toGenerate = 20;
+	for (int i = 0; i < 25; i++){
+		for (int j = 0; j < 79; j++){
+			if (map[i][j]->getSymbol() == 'G' && ((ItemGold *) map[i][j]->getEntity())->getValue() == 6){
+				int success = 0;
+				do{
+					int xMod = (rand() % 3 - 1);
+					int yMod = (rand() % 3 - 1);
+					success = map[i+yMod][j+xMod]->addEntity(new NPC("dragon"));
+				}while(success != 1);
+				toGenerate--;
+			}
+		}
+	}
+	for (int i = 0; i < toGenerate; i++){
 		int chamberChoice = (rand() % chamberCount);
 		chambers[chamberChoice]->generateEnemy();
 	}
