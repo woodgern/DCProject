@@ -442,7 +442,12 @@ void updateEnemies(string &action){
 					do{
 						int xMod = (rand() % 3) - 1;
 						int yMod = (rand() % 3) - 1;
-						success = tile->moveEntity(fullDungeon[currentFloor][i+yMod][j+xMod]);
+						if (xMod == 0 && yMod == 0){
+							success = 1;
+						}
+						else{
+							success = tile->moveEntity(fullDungeon[currentFloor][i+yMod][j+xMod]);
+						}
 					}while(success != 1);
 				}
 			}
