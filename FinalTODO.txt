@@ -9,9 +9,17 @@
 		2. What would you have done differently if you had the chance to start over?
 
 
+
+
+1. This project taught us that working in teams can make things easier and harder. It becomes easier because having more people lets you split the work and put your heads together to come up with better and more efficent solutions. At the same time, it becomes harder because all members have to communicate very thoroughly to make sure the job gets done properly. 
+
+2. If we had the chance to start over, we would have planned for more small but nice features to add as DLC and designed them into our project. We also would have designed abilities differently so that they aren't so scattered across the entire program and so that more abilities could be added easily.
+
 Overview:
 
-The main game flow and direction is controlled by the engine. The engine is a .cc file that interprets the input and stores the state of the level and it's inhabitants. The generation of objects is handled by the EntityFactory, which is implemented using the factory pattern. It can generate random potions, gold, or Enemies. An The world is represented using a two dimensional array that is filled with objects called Tiles. Tiles store a pointer to an Enitity, which is either a player, enemy, or item. Tiles also have a variety of methods for moving entities to adjacent tiles and handling the entity.  
+The main game flow and direction is controlled by the engine. The engine is a .cc file that interprets the input and stores the state of the level and it's inhabitants. In general, the engine controls input, output, and controls each turn. The generation of objects is handled by the EntityFactory, which is implemented using the factory pattern. It can generate random potions, gold, or Enemies. An object exists to describe game element called an Entity. An Entity can be a Character or item. This structure allows a general entity pointer to hold any possible character or item. The world is represented using a two dimensional array that is filled with objects called Tiles. Tiles store a pointer to an Enitity, which is either a player, enemy, or item. Tiles also have a variety of methods for moving entities to adjacent tiles and handling the entity. Another object exists called 'Chamber'. This is a collection of Tiles and it is used to define the seperate chambers. This is needed to ensure that each chamber is equally likely to spawn items and monsters. Abilities are handled by a function called applyAbility() that can be called during pivotal ability events (like death, on hit, etc) and it applies the characters ability if it is applicable.
+
+This design is almost exactly what we originally planned. The main difference is how abilities are handled. Originally, each character had an ability object that stored all of the information about their ability and could be used to apply it. The problem with that was that it created a cyclical dependecy with character. This lead us to re-design the using of abilities.  
 
 
 1. We ended up designing the divison of races in the way we originally planned. There is a Character object with a field 'race' that stores the race of a particular character, regardless of whether it's an enemy or a player.
