@@ -176,6 +176,7 @@ void changeFloors(){
 	currentFloor++;
 	display = new TextDisplay(fullDungeon[currentFloor], player);
 	findPlayer();
+	player->resetStats();
 }
 
 void reset(){
