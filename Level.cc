@@ -6,7 +6,6 @@
 #include <sstream>
 
 Level::Level (Player *toPlace) {
-	srand (time(NULL));
 	chamberCount = 0;
 	capacity = 5;
 	chambers = new Chamber *[capacity];
