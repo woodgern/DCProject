@@ -398,7 +398,7 @@ void execute(string &action){
 		else{
 			int success = fullDungeon[currentFloor][y][x]->moveEntity(target);
 			if (success == -1){
-				if (currentFloor == 5){
+				if (currentFloor == 4){
 					isQuitting = true;
 					return;
 				}
