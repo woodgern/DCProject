@@ -7,3 +7,20 @@
   >		1. What lessons did this project teach you about developing software in teams? If you worked
 		alone, what lessons did you learn about writing large programs?
 		2. What would you have done differently if you had the chance to start over?
+
+
+Overview:
+
+The main game flow and direction is controlled by the engine. The engine is a .cc file that interprets the input and stores the state of the level and it's inhabitants. The generation of objects is handled by the EntityFactory, which is implemented using the factory pattern. It can generate random potions, gold, or Enemies. An The world is represented using a two dimensional array that is filled with objects called Tiles. Tiles store a pointer to an Enitity, which is either a player, enemy, or item. Tiles also have a variety of methods for moving entities to adjacent tiles and handling the entity.  
+
+
+1. We ended up designing the divison of races in the way we originally planned. There is a Character object with a field 'race' that stores the race of a particular character, regardless of whether it's an enemy or a player.
+
+2.The way we generated enemies did not change from our original design. We use the factory pattern that contains a method that generates a random type of valid enemy. The player was generated seperately by the game engine because the player is only generated once. 
+
+3.We changed how we implemented our abilities from our original design. We now have an ability file that is not an object and contains a method called 'applyAbility'. This method is called at key events where abilities happen (death, on hit, on turn) and executes the players ability if it is applicable to the event. This changes the cyclical dependency the previous design had. We also implement some abilities, such as the human ability, seperately in the game engine because it either requires access to information that is not accesible by the ability method or occurs at an odd time. 
+
+4.We did not end up using the decorator pattern for potion application because of the fact that potion only ever affect stats, meaning stats can simply be modified to take into account the potions affect.
+
+5. We implemented potion and gold as we originally designed. They are generated using the factory pattern, where it has a function that returns a random potion, and one that generates a random gold drop. This allows us to use these two functions to generate gold and potions where ever they are needed.
+

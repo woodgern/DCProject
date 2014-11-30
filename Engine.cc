@@ -347,7 +347,7 @@ void execute(string &action){
 		string dir;
 		stream >> dir;
 		Tile *target = getTargetTile(dir, junk, tempX, tempY);
-		if (target == NULL){
+		if (target == NULL || !target->isNPC()){
 			action = "";
 			execute(action);
 		}
