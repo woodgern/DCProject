@@ -126,7 +126,7 @@ Tile::~Tile () {
     if (isOccupied() && occupyingEntity->getClassName() == 't'){
       ItemPotion *temp = (ItemPotion *) occupyingEntity;
       play->applyPotion(temp);
-      value = "Player uses " + temp->getDescription();
+      value = "Player uses " + temp->getDescription() + ".";
       occupyingEntity = NULL;
     }
     return value;
