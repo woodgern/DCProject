@@ -27,7 +27,12 @@ void Level::generateEnemies (){
 				do{
 					int xMod = (rand() % 3 - 1);
 					int yMod = (rand() % 3 - 1);
-					success = map[i+yMod][j+xMod]->addEntity(new NPC("dragon"));
+					if (xMod != 0 || yMod != 0){
+						success = map[i+yMod][j+xMod]->addEntity(new NPC("dragon"));
+					}
+					else{
+						success = 0;
+					}
 				}while(success != 1);
 				toGenerate--;
 			}

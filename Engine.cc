@@ -146,7 +146,7 @@ bool canDragonAttack(int x, int y){
 		return true;
 	}
 
-	//See if horde is in range
+	//See if hoard is in range
 	for(int i = -1; i <= 1; i++){
 		for (int j = -1; j <= 1; j++){
 			if (fullDungeon[currentFloor][y+j][x+i]->getSymbol() == 'G' && 
@@ -359,7 +359,7 @@ void execute(string &action){
 				if(tempEnemy->getRace() == "merchant"){
 					hasAngeredMerchants = true;
 				}
-				if(tempEnemy->isDead()){
+				if(tempEnemy->isDead() && tempEnemy->getRace() != "dragon"){
 					applyAbility('k', player, NULL);
 					Item * drop = factory->generateDrops(tempEnemy->getSymbol());
 					if(tempEnemy->getSymbol() == 'H'){
