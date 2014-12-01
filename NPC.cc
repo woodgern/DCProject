@@ -5,6 +5,7 @@
 
 NPC::NPC (std::string type): Character()  {
 	race = type;
+	hasMoved = false;
 	if (type == "dwarf"){
 		baseAttack = 20;
 		baseDefense = 30;

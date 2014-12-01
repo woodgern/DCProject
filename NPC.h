@@ -21,6 +21,7 @@ NPC does not have any pure virtual methods, but its author
 class NPC : public Character
 {
 public:
+  bool hasMoved;
   NPC ();
   NPC(std::string type);
   char getClassName ();

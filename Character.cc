@@ -5,7 +5,6 @@
 #include <sstream>
 
   Character::Character(){
-
   }
 
   Character::~Character(){

@@ -24,6 +24,16 @@ bool reRun = false;
 int currentFloor = 0;
 EntityFactory *factory;
 
+void resetEnemies(){
+	for (int i = 0; i < 25; i++){
+		for (int j = 0; j < 79; j++){
+			if (fullDungeon[currentFloor][i][j]->isNPC()){
+				((NPC *) fullDungeon[currentFloor][i][j]->getEntity())->hasMoved = false;
+			}
+		}
+	}
+}
+
 Tile * getTargetTile(string desired, string &movement, int &newX, int &newY){
 	int x = player->getX();
 	int y = player->getY();
@@ -423,7 +433,8 @@ void updateEnemies(string &action){
 	for (int i = 0; i < 25; i++){
 		for (int j = 0; j < 79; j++){
 			Tile *tile = fullDungeon[currentFloor][i][j];
-			if(tile->isOccupied() && tile->getEntity()->getClassName() == 'n'){
+			if(tile->isNPC() && ((NPC *) tile->getEntity())->hasMoved == false){
+				((NPC *) tile->getEntity())->hasMoved = true;
 				if (((tile->getSymbol() != 'M' || hasAngeredMerchants) &&
 					(i <= playY + 1 && i >= playY - 1) &&
 					(j <= playX + 1 && j >= playX - 1)) ||
@@ -501,6 +512,7 @@ int main(int argc, char* argv[]){
 		findPlayer();
 		display = new TextDisplay(fullDungeon[currentFloor], player);
 		while (!isQuitting){
+			resetEnemies();
 			applyAbility('t', player, NULL);
 			seeNearbyPotions(action);
 			display->draw(action, currentFloor);
