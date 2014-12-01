@@ -29,7 +29,7 @@ Tile::~Tile () {
    */
   bool Tile::addEntity (Entity* toPlace)
   {
-  	if(occupyingEntity != NULL && !isGold()) {
+  	if((occupyingEntity != NULL && !isGold()) || !isPassable()) {
   		return false;
   	}
   	occupyingEntity = toPlace;
